@@ -812,33 +812,6 @@
     
     
     <entry>
-      <title>MVN日常使用</title>
-      <link href="2015/09/13/MVN%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8/"/>
-      <url>2015/09/13/MVN%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>工作中日常使用</p></blockquote><p>#command</p><p>跳过测试进行</p><pre><code>mvn  -Dmaven.test.skip=true package</code></pre><h1 id="指定打包的环境"><a href="#指定打包的环境" class="headerlink" title="指定打包的环境"></a>指定打包的环境</h1><pre><code>mvn -DskipTests clean package -P FTE2</code></pre><blockquote><p>mvn -U clean package -Dmaven.test.skip=true -pl biz/pom.xml -am<br>    <a href="http://www.mzone.cc/article/277.html">maven中snapshot快照库和release发布库的区别和作用</a></p></blockquote><blockquote><p>mvn -am -DskipTests -U -pl biz-web clean package       </p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 日常工具 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> java </tag>
-            
-            <tag> maven </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>工作中使用的工具整理</title>
       <link href="2015/09/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86/"/>
       <url>2015/09/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86/</url>
@@ -860,6 +833,33 @@
             <tag> mac </tag>
             
             <tag> 软件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MVN日常使用</title>
+      <link href="2015/09/13/MVN%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8/"/>
+      <url>2015/09/13/MVN%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>工作中日常使用</p></blockquote><p>#command</p><p>跳过测试进行</p><pre><code>mvn  -Dmaven.test.skip=true package</code></pre><h1 id="指定打包的环境"><a href="#指定打包的环境" class="headerlink" title="指定打包的环境"></a>指定打包的环境</h1><pre><code>mvn -DskipTests clean package -P FTE2</code></pre><blockquote><p>mvn -U clean package -Dmaven.test.skip=true -pl biz/pom.xml -am<br>    <a href="http://www.mzone.cc/article/277.html">maven中snapshot快照库和release发布库的区别和作用</a></p></blockquote><blockquote><p>mvn -am -DskipTests -U -pl biz-web clean package       </p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日常工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> maven </tag>
             
         </tags>
       
@@ -922,33 +922,6 @@
     
     
     <entry>
-      <title>设计模式分类</title>
-      <link href="2015/09/12/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80/"/>
-      <url>2015/09/12/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>平时工作代码进行重构时也会涉及到设计模式，另外在看一些开源框架时也会涉及到很多的设计模式。只是平时没有太全面的了解，最近面试时有同事问汲到这里，所以在这里整理以备将来随时查看。<br>这里我举一个最容易理解的例子来解释每种设计模式<br>首先看一下设计模式的分类及关系 </p></blockquote><img  src='/images/pattern/pattern.png' class='col-xs-12 thumbnail'/><p>它们之间的关系如图：<br><img  src='/images/pattern/relation.png' class='col-xs-12 thumbnail'/></p><p>##创建型模式<br>这六个模式都是与创建对象相关的</p><ul><li>简单工厂模式（Simple Factory）；</li><li>工厂方法模式（Factory Method）；</li><li>抽象工厂模式（Abstract Factory）；</li><li>创建者模式（Builder）；</li><li>原型模式（Prototype）；</li><li>单例模式（Singleton）；</li></ul><p>##结构型模式</p><p>创建对象后，对象与对象之间的依赖关系，设计好了会为后续代码的维护带来很大的方便。</p><ul><li>外观模式（Facade）；</li><li>适配器模式（Adapter）；</li><li>代理模式（Proxy）；</li><li>装饰模式（Decorator）；</li><li>桥模式（Bridge）；</li><li>组合模式（Composite）；</li><li>享元模式（Flyweight）</li></ul><p>##行为型模式</p><p>对象的创建和结构定义好后，就是他们的行为的设计了。<br>模板方法模式（Template Method）；</p><ul><li>观察者模式（Observer）；</li><li>状态模式（State）；</li><li>策略模式（Strategy）；</li><li>职责链模式（Chain of Responsibility）；</li><li>命令模式（Command）；</li><li>访问者模式（Visitor）；</li><li>调停者模式（Mediator）；</li><li>备忘录模式（Memento）；</li><li>迭代器模式（Iterator）；</li><li>解释器模式（Interpreter）</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 技术 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> java </tag>
-            
-            <tag> 设计模式 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ThreadPoolExecutor 源码分析</title>
       <link href="2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadPoolExecutor/"/>
       <url>2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BThreadPoolExecutor/</url>
@@ -968,6 +941,33 @@
             <tag> java </tag>
             
             <tag> 多线程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设计模式分类</title>
+      <link href="2015/09/12/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80/"/>
+      <url>2015/09/12/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%80/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>平时工作代码进行重构时也会涉及到设计模式，另外在看一些开源框架时也会涉及到很多的设计模式。只是平时没有太全面的了解，最近面试时有同事问汲到这里，所以在这里整理以备将来随时查看。<br>这里我举一个最容易理解的例子来解释每种设计模式<br>首先看一下设计模式的分类及关系 </p></blockquote><img  src='/images/pattern/pattern.png' class='col-xs-12 thumbnail'/><p>它们之间的关系如图：<br><img  src='/images/pattern/relation.png' class='col-xs-12 thumbnail'/></p><p>##创建型模式<br>这六个模式都是与创建对象相关的</p><ul><li>简单工厂模式（Simple Factory）；</li><li>工厂方法模式（Factory Method）；</li><li>抽象工厂模式（Abstract Factory）；</li><li>创建者模式（Builder）；</li><li>原型模式（Prototype）；</li><li>单例模式（Singleton）；</li></ul><p>##结构型模式</p><p>创建对象后，对象与对象之间的依赖关系，设计好了会为后续代码的维护带来很大的方便。</p><ul><li>外观模式（Facade）；</li><li>适配器模式（Adapter）；</li><li>代理模式（Proxy）；</li><li>装饰模式（Decorator）；</li><li>桥模式（Bridge）；</li><li>组合模式（Composite）；</li><li>享元模式（Flyweight）</li></ul><p>##行为型模式</p><p>对象的创建和结构定义好后，就是他们的行为的设计了。<br>模板方法模式（Template Method）；</p><ul><li>观察者模式（Observer）；</li><li>状态模式（State）；</li><li>策略模式（Strategy）；</li><li>职责链模式（Chain of Responsibility）；</li><li>命令模式（Command）；</li><li>访问者模式（Visitor）；</li><li>调停者模式（Mediator）；</li><li>备忘录模式（Memento）；</li><li>迭代器模式（Iterator）；</li><li>解释器模式（Interpreter）</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+            <tag> 设计模式 </tag>
             
         </tags>
       
@@ -1142,35 +1142,6 @@
     
     
     <entry>
-      <title>ionic 学习计划</title>
-      <link href="2015/08/24/ionic%20schedule/"/>
-      <url>2015/08/24/ionic%20schedule/</url>
-      
-        <content type="html"><![CDATA[<p>###1. 第一章 ionic基本介绍</p><blockquote><p>08.24 </p></blockquote><p>###2. 第二章  开发环境 工具和工作流程介绍 </p><blockquote><p>08.25-08.27 </p></blockquote><p>###3. 第三章 Trendicity 项目实例</p><blockquote><p>08.28-09-20 </p></blockquote><p>###4. 第四章 实现菜单滑动和设置路线</p><blockquote><p>09.20-10.30 </p></blockquote><p>###5. 第五章 与地图的集成</p><blockquote><p>10-01-10.10 </p></blockquote><p>###6. 第六章 权限制控制</p><blockquote><p>10.11 </p></blockquote><p>###7. 第七章 设计应用</p><blockquote><p>10.12-10.20 </p></blockquote><p>###8. 第八章 与服务的交互</p><blockquote><p>10.22 </p></blockquote><p>###9. 第九章 下一步要做什么呢？</p><blockquote><p>10.25 </p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 扩展知识 </category>
-          
-          <category> 读书学习 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ionic </tag>
-            
-            <tag> angularjs </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>第一章ionic 基本介绍</title>
       <link href="2015/08/24/ionic%20%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/"/>
       <url>2015/08/24/ionic%20%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D/</url>
@@ -1223,6 +1194,35 @@
             <tag> schedule </tag>
             
             <tag> nocomment </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ionic 学习计划</title>
+      <link href="2015/08/24/ionic%20schedule/"/>
+      <url>2015/08/24/ionic%20schedule/</url>
+      
+        <content type="html"><![CDATA[<p>###1. 第一章 ionic基本介绍</p><blockquote><p>08.24 </p></blockquote><p>###2. 第二章  开发环境 工具和工作流程介绍 </p><blockquote><p>08.25-08.27 </p></blockquote><p>###3. 第三章 Trendicity 项目实例</p><blockquote><p>08.28-09-20 </p></blockquote><p>###4. 第四章 实现菜单滑动和设置路线</p><blockquote><p>09.20-10.30 </p></blockquote><p>###5. 第五章 与地图的集成</p><blockquote><p>10-01-10.10 </p></blockquote><p>###6. 第六章 权限制控制</p><blockquote><p>10.11 </p></blockquote><p>###7. 第七章 设计应用</p><blockquote><p>10.12-10.20 </p></blockquote><p>###8. 第八章 与服务的交互</p><blockquote><p>10.22 </p></blockquote><p>###9. 第九章 下一步要做什么呢？</p><blockquote><p>10.25 </p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 扩展知识 </category>
+          
+          <category> 读书学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ionic </tag>
+            
+            <tag> angularjs </tag>
             
         </tags>
       
