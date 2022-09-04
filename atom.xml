@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-09-04T11:36:46.587Z</updated>
+  <updated>2022-09-04T14:13:40.574Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>名人-徐悲鸿-纪念馆</title>
+    <link href="http://example.com/2022/09/04/%E5%90%8D%E4%BA%BA-%E5%BE%90%E6%82%B2%E9%B8%BF-%E7%BA%AA%E5%BF%B5%E9%A6%86/"/>
+    <id>http://example.com/2022/09/04/%E5%90%8D%E4%BA%BA-%E5%BE%90%E6%82%B2%E9%B8%BF-%E7%BA%AA%E5%BF%B5%E9%A6%86/</id>
+    <published>2022-09-04T12:12:07.000Z</published>
+    <updated>2022-09-04T14:13:40.574Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">今天上午与亚林兄长来参观徐先生的展馆；我辈要向先生看齐，静下心做自己想做的事情，做到极致；</span><br><span class="line">这里整理主要生平以做备忘和自我激励</span><br></pre></td></tr></table></figure><p><img src="/2022/09/04/%E5%90%8D%E4%BA%BA-%E5%BE%90%E6%82%B2%E9%B8%BF-%E7%BA%AA%E5%BF%B5%E9%A6%86/%E5%8F%82%E8%A7%82%E5%BE%90%E6%82%B2%E9%B8%BF%E7%BA%AA%E5%BF%B5%E9%A6%86%E6%99%9A%E6%95%B4%E7%90%86.png" alt="img.png"></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;今天上午与亚林兄长来参观徐先生的展馆；我辈要向先生看齐，静下心做自己想做的事情，做到极致；&lt;/span&gt;&lt;br&gt;</summary>
+      
+    
+    
+    
+    <category term="艺术" scheme="http://example.com/categories/%E8%89%BA%E6%9C%AF/"/>
+    
+    
+    <category term="绘画" scheme="http://example.com/tags/%E7%BB%98%E7%94%BB/"/>
+    
+    <category term="徐悲鸿" scheme="http://example.com/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/"/>
+    
+  </entry>
   
   <entry>
     <title>静静的健身-保持健康</title>
@@ -48,9 +74,9 @@
     <link href="http://example.com/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/"/>
     <id>http://example.com/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/</id>
     <published>2022-09-03T23:01:04.000Z</published>
-    <updated>2022-09-04T11:59:29.402Z</updated>
+    <updated>2022-09-04T12:09:12.802Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="一-下载博客git到本地"><a href="#一-下载博客git到本地" class="headerlink" title="一. 下载博客git到本地"></a>一. 下载博客git到本地</h3><h3 id="二-安装-hexo"><a href="#二-安装-hexo" class="headerlink" title="二. 安装 hexo"></a>二. 安装 <a href="https://hexo.io/zh-cn/">hexo</a></h3><h3 id="三-当前项目目录中安装主题及node依赖包"><a href="#三-当前项目目录中安装主题及node依赖包" class="headerlink" title="三. 当前项目目录中安装主题及node依赖包"></a>三. 当前项目目录中安装主题及node依赖包</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">node install</span><br><span class="line">git clone --depth 1 https://github.com/hexojs/hexo-theme-landscape themes/landscape</span><br></pre></td></tr></table></figure><h3 id="四-测试使用"><a href="#四-测试使用" class="headerlink" title="四. 测试使用"></a>四. 测试使用</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server </span><br></pre></td></tr></table></figure><h3 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五. 遇到的问题"></a>五. 遇到的问题</h3><ul><li>无法deploy </li></ul><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL &#123;</span><br><span class="line">err: Error: Spawn failed</span><br><span class="line">at ChildProcess.&lt;anonymous&gt; (/Users/Aaron/Documents/code/github/wansongblog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">at ChildProcess.emit (node:events:390:28)</span><br><span class="line">at Process.ChildProcess._handle.onexit (node:internal/child_process:290:12) &#123;</span><br><span class="line">code: 128</span><br><span class="line">&#125;</span><br><span class="line">&#125; Something&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li>无法修改， 新建的文档是被锁定的</li></ul><p><img src="/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/new_doc_error.png" alt="img.png"></p><blockquote><p>解决办法: 修改hexo权限即可</p></blockquote><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  wansongblog git:(master) ✗ which hexo</span><br><span class="line">/usr/local/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ ll /usr/local/bin/hexo</span><br><span class="line">lrwxr-xr-x  1 root  wheel  37 Sep  4 05:24 /usr/local/bin/hexo -&gt; ../lib/node_modules/hexo-cli/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ cd  /usr/local/bin/</span><br><span class="line">➜  bin cd ../lib/node_modules</span><br><span class="line">➜  node_modules chmod +R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: +R</span><br><span class="line">➜  node_modules chmod R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: R</span><br><span class="line">➜  node_modules sudo chmod -r 777 hexo-cli</span><br><span class="line">Password:</span><br><span class="line">chmod: 777: No such file or directory</span><br><span class="line">➜  node_modules sudo chmod -R 777 hexo-cli</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h3 id="一-下载博客git到本地"><a href="#一-下载博客git到本地" class="headerlink" title="一. 下载博客git到本地"></a>一. 下载博客git到本地</h3><h3 id="二-安装-hexo"><a href="#二-安装-hexo" class="headerlink" title="二. 安装 hexo"></a>二. 安装 <a href="https://hexo.io/zh-cn/">hexo</a></h3><h3 id="三-当前项目目录中安装主题及node依赖包"><a href="#三-当前项目目录中安装主题及node依赖包" class="headerlink" title="三. 当前项目目录中安装主题及node依赖包"></a>三. 当前项目目录中安装主题及node依赖包</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">node install</span><br><span class="line">git clone --depth 1 https://github.com/hexojs/hexo-theme-landscape themes/landscape</span><br></pre></td></tr></table></figure><h3 id="四-测试使用"><a href="#四-测试使用" class="headerlink" title="四. 测试使用"></a>四. 测试使用</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server </span><br></pre></td></tr></table></figure><h3 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五. 遇到的问题"></a>五. 遇到的问题</h3><ul><li>无法deploy </li></ul><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL &#123;</span><br><span class="line">       err: Error: Spawn failed</span><br><span class="line">       at ChildProcess.&lt;anonymous&gt; (/Users/Aaron/Documents/code/github/wansongblog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">       at ChildProcess.emit (node:events:390:28)</span><br><span class="line">       at Process.ChildProcess._handle.onexit (node:internal/child_process:290:12) &#123;</span><br><span class="line">       code: 128</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">Something&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure><ul><li>无法修改， 新建的文档是被锁定的</li></ul><p><img src="/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/new_doc_error.png" alt="img.png"></p><blockquote><p>解决办法: 修改hexo权限即可</p></blockquote><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  wansongblog git:(master) ✗ which hexo</span><br><span class="line">/usr/local/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ ll /usr/local/bin/hexo</span><br><span class="line">lrwxr-xr-x  1 root  wheel  37 Sep  4 05:24 /usr/local/bin/hexo -&gt; ../lib/node_modules/hexo-cli/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ cd  /usr/local/bin/</span><br><span class="line">➜  bin cd ../lib/node_modules</span><br><span class="line">➜  node_modules chmod +R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: +R</span><br><span class="line">➜  node_modules chmod R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: R</span><br><span class="line">➜  node_modules sudo chmod -r 777 hexo-cli</span><br><span class="line">Password:</span><br><span class="line">chmod: 777: No such file or directory</span><br><span class="line">➜  node_modules sudo chmod -R 777 hexo-cli</span><br></pre></td></tr></table></figure>]]></content>
     
     
     <summary type="html">在一个新的设备上如何开始</summary>
@@ -535,33 +561,6 @@
     
     
     <category term="音乐" scheme="http://example.com/tags/%E9%9F%B3%E4%B9%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>将amr,caf转mp3</title>
-    <link href="http://example.com/2015/12/27/%E5%B0%86amr,caf%E8%BD%ACmp3/"/>
-    <id>http://example.com/2015/12/27/%E5%B0%86amr,caf%E8%BD%ACmp3/</id>
-    <published>2015-12-26T16:00:00.000Z</published>
-    <updated>2022-09-03T10:12:16.076Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><hr><p><code>公司原有文件存储现在要用java进行重构，其中涉及到Android和ios上的音频问题。</code></p><ol><li><p>Android录音是格式是amr，在电脑上一般是播放不出来的，必须要进行转码。</p></li><li><p>iPhone录音传上来的是caf，在android上是不能进行播放的。</p></li></ol><p><code>由于上面的问题，我们要进行文件的转换，另外还有一个需求就是，amr转wav ,这里我们将amr和caf统一转换为map3,另外提供一个接口进行amr2wav的转换。 在网上参考了许多，总结下来还都是调用ffmpeg 进行想着音频的转换。总也来说比较简单。这里时间的关系 ，也不可能去研究底层编解码的东西。</code></p><hr><h1 id="开工"><a href="#开工" class="headerlink" title="开工"></a>开工</h1><h2 id="安装ffmpeg"><a href="#安装ffmpeg" class="headerlink" title="安装ffmpeg"></a>安装<a href="https://www.ffmpeg.org/ffmpeg.html#Audio-Options">ffmpeg</a></h2><ul><li>参考<a href="http://my.oschina.net/ethan09/blog/372435">http://my.oschina.net/ethan09/blog/372435</a></li></ul><h2 id="查看当前ffmpeg对mp3的编解码支持情况"><a href="#查看当前ffmpeg对mp3的编解码支持情况" class="headerlink" title="查看当前ffmpeg对mp3的编解码支持情况"></a>查看当前ffmpeg对mp3的编解码支持情况</h2><pre><code>    ffmpeg -codecs|grep mp3                                             D.A.L. mp3                  MP3 (MPEG audio layer 3) (decoders: mp3 mp3float )     D.A.L. mp3adu               ADU (Application Data Unit) MP3 (MPEG audio layer 3) (decoders: mp3adu mp3adufloat )     D.A.L. mp3on4               MP3onMP4 (decoders: mp3on4 mp3on4float )     </code></pre><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><ul><li>ffmpeg: error while loading shared libraries: libavdevice.so.53: cannot open shared object file: No such file or directory</li></ul><pre><code>      ffmpeg正常安装后执行ffmpeg时出现如下错误：      解决办法：      vi /etc/ld.so.conf      加入：/usr/local/lib      执行ldconfig</code></pre><ul><li><p>ffmpeg -i test.amr test.mp3<br>ffmpeg: error while loading shared libraries: libavdevice.so.56: cannot open shared object file: No such file or directory</p><pre><code> &lt;http://www.tjcarroll.org/?p=51&gt;</code></pre></li></ul>]]></content>
-    
-    
-    <summary type="html">Java android amr caf mp3</summary>
-    
-    
-    
-    <category term="方案" scheme="http://example.com/categories/%E6%96%B9%E6%A1%88/"/>
-    
-    
-    <category term="java" scheme="http://example.com/tags/java/"/>
-    
-    <category term="音频转换" scheme="http://example.com/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/"/>
-    
-    <category term="arm" scheme="http://example.com/tags/arm/"/>
-    
-    <category term="mp3" scheme="http://example.com/tags/mp3/"/>
     
   </entry>
   

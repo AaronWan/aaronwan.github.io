@@ -132,6 +132,224 @@
     <section class="meta">
         
             <h2 class="title">
+                <a href="/2015/09/13/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+                    JAVA设计模式之行为型模式
+                </a>
+            </h2>
+        
+        <time>
+            9月 13, 2015
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+    </section>
+    <section class="article typo">
+        <p>##行为型模式</p>
+<p>对象的创建和结构定义好后，就是他们的行为的设计了。</p>
+<ul>
+<li>模板方法模式（Template Method）；</li>
+<li>观察者模式（Observer）；</li>
+<li>状态模式（State）；</li>
+<li>策略模式（Strategy）；</li>
+<li>职责链模式（Chain of Responsibility）；</li>
+<li>命令模式（Command）；</li>
+<li>访问者模式（Visitor）；</li>
+<li>调停者模式（Mediator）；</li>
+<li>备忘录模式（Memento）；</li>
+<li>迭代器模式（Iterator）；</li>
+<li>解释器模式（Interpreter）；</li>
+</ul>
+<h2 id="模板方法模式（Template-Method）；"><a href="#模板方法模式（Template-Method）；" class="headerlink" title="模板方法模式（Template Method）；"></a>模板方法模式（Template Method）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>定义一个操作中的算法的骨架,而将一些步骤延迟到子类中。<br> Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</p>
+</blockquote>
+<p>这里我们以画布上画画为例,我们定义一抽象类，其中定义一个渲染方法，渲染时有两个步骤，一个画背景，二能画主体，三加印章。<br>咱们这里画一个圆和画一个矩形，抽象类中定义渲染时的先后流程，具体的实现有具体的子类进行实现。</p>
+<div class="col-xs-12">
+<img  src='/images/pattern/templatemethod.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+
+<p><code>代码如下：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.temlatemothod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractShape</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">render</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.drawBackground();</span><br><span class="line">        <span class="keyword">this</span>.drawGraphics();</span><br><span class="line">        <span class="keyword">this</span>.drawSignature();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">drawSignature</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">drawBackground</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">drawGraphics</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.temlatemothod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CircleShape</span> <span class="keyword">extends</span> <span class="title">AbstractShape</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawSignature</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw circle signature!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBackground</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw circle background! &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawGraphics</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw circle graphics!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.temlatemothod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RectShape</span> <span class="keyword">extends</span> <span class="title">AbstractShape</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawSignature</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw rect signature!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawBackground</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw rect background! &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawGraphics</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;draw rect graphics!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.temlatemothod;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> CircleShape().render();</span><br><span class="line">        System.out.println(<span class="string">&quot;-----&quot;</span>);</span><br><span class="line">        <span class="keyword">new</span> RectShape().render();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>输出结果：</code></p>
+<pre><code>draw circle background! 
+draw circle graphics!
+draw circle signature!
+-----
+draw circle background! 
+draw circle graphics!
+draw circle signature!</code></pre>
+<h2 id="观察者模式（Observer）；"><a href="#观察者模式（Observer）；" class="headerlink" title="观察者模式（Observer）；"></a>观察者模式（Observer）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>定义对象间的一种一对多的依赖关系 , 以便当一个对象的状态发生改变时 , 所有依赖于它的对象都得到通知并自动刷新。</p>
+</blockquote>
+<p>我们常常会遇到，当一个事件发生时，会有一些监听者进行相应的响应。这里我们的例子是， 当GPS发生变化时，它的订阅者的update的方法就会被调用。</p>
+<div class="col-xs-12">
+    <img  src='/images/pattern/observer.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`下面是示例代码：`
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.observer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Array;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Observer&gt; observers=<span class="keyword">new</span> ArrayList&lt;Observer&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer observer)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer observer)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(Observer observer:observers)&#123;</span><br><span class="line">            observer.update(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.observer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSSubject</span> <span class="keyword">extends</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Point point;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">move</span><span class="params">(Point point)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.point=point;</span><br><span class="line">        <span class="keyword">this</span>.notifyObserver();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.observer;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Observer</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Subject subject)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.observer;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapObserver</span> <span class="keyword">extends</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Subject subject)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;_&quot;</span>+<span class="keyword">this</span>.hashCode()+<span class="string">&quot; observer:&quot;</span>+subject.getClass().getSimpleName()+<span class="string">&quot; position changed;&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.observer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/16.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        GPSSubject subject=<span class="keyword">new</span> GPSSubject();</span><br><span class="line">        subject.addObserver(<span class="keyword">new</span> MapObserver());</span><br><span class="line">        Observer observer1=<span class="keyword">null</span>;</span><br><span class="line">        subject.addObserver(observer1=<span class="keyword">new</span> MapObserver());</span><br><span class="line">        subject.move(<span class="keyword">new</span> Point(<span class="number">200</span>, <span class="number">400</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;remove one observer from subject&#x27;s observer list!&quot;</span>);</span><br><span class="line">        subject.removeObserver(observer1);</span><br><span class="line">        subject.move(<span class="keyword">new</span> Point(<span class="number">200</span>,<span class="number">400</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="状态模式（State）；"><a href="#状态模式（State）；" class="headerlink" title="状态模式（State）；"></a>状态模式（State）；</h2><blockquote>
+<p>GoF这样定义: 允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它<br>所属的类。</p>
+</blockquote>
+<div class="col-xs-12">
+    <img  src='/images/pattern/state.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+
+<p><code>以下是示例代码：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> <span class="keyword">extends</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> OpeningState openingState = <span class="keyword">new</span> OpeningState();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ClosingState closingState = <span class="keyword">new</span> ClosingState();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> RunningState runningState = <span class="keyword">new</span> RunningState();</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> StoppingState stoppingState = <span class="keyword">new</span> StoppingState();</span><br><span class="line">    <span class="keyword">private</span> AbstractLifeState lifeState;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Context</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> AbstractLifeState <span class="title">getLifeState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> lifeState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLifeState</span><span class="params">(AbstractLifeState lifeState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifeState = lifeState;</span><br><span class="line">        <span class="keyword">this</span>.lifeState.setContext(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifeState.open();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifeState.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifeState.run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.lifeState.stop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Context context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setContext</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = context;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OpeningState</span> <span class="keyword">extends</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate open&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate close&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.context.setLifeState(Context.closingState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate run&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.context.setLifeState(Context.runningState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate stop&quot;</span>);</span><br><span class="line">        <span class="keyword">this</span>.context.setLifeState(Context.stoppingState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunningState</span> <span class="keyword">extends</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate open&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.openingState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate close&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.closingState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate run&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate stop&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.stoppingState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoppingState</span> <span class="keyword">extends</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate open&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate close&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate run&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate stop&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClosingState</span> <span class="keyword">extends</span> <span class="title">AbstractLifeState</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">open</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate open&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.openingState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;: operate close&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate run&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.runningState);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;: operate stop&quot;</span>);</span><br><span class="line">        context.setLifeState(Context.stoppingState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.state;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> design.pattern.flayweight.ConnectionPool;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/20.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Context context=<span class="keyword">new</span> Context();</span><br><span class="line">        context.setLifeState(Context.closingState);</span><br><span class="line">        context.open();</span><br><span class="line">        context.run();</span><br><span class="line">        context.close();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="策略模式（Strategy）；"><a href="#策略模式（Strategy）；" class="headerlink" title="策略模式（Strategy）；"></a>策略模式（Strategy）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>定义一系列的算法,把它们一个个封装起来,并且使它们可相互替换。</p>
+</blockquote>
+<p>计算器的实现，其中计算的</p>
+<div class="col-xs-12">
+<img src='/images/pattern/strategy.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+
+<p><code>以下是示例代码：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ICalculate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">double</span> b)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddCalculate</span> <span class="keyword">implements</span> <span class="title">ICalculate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DivisionCalculate</span> <span class="keyword">implements</span> <span class="title">ICalculate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a/b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SubtractionCalculate</span> <span class="keyword">implements</span> <span class="title">ICalculate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a-b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ICalculate calculate;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Context</span><span class="params">(ICalculate calculate)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.calculate=calculate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ICalculate <span class="title">getCalculate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> calculate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCalculate</span><span class="params">(ICalculate calculate)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.calculate = calculate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculate</span><span class="params">(<span class="keyword">double</span> a,<span class="keyword">double</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.calculate.calculate(a,b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/21.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        Context context =<span class="keyword">new</span> Context(<span class="keyword">new</span> AddCalculate());</span><br><span class="line">        <span class="keyword">double</span> result=context.calculate(<span class="number">20.0</span>,<span class="number">30.3</span>);</span><br><span class="line">        System.out.println(result);</span><br><span class="line">        context.setCalculate(<span class="keyword">new</span> DivisionCalculate());</span><br><span class="line">        System.out.println(context.calculate(<span class="number">20</span>,<span class="number">40</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>结果输出：</code></p>
+<pre><code>50.3
+0.5</code></pre>
+<h2 id="职责链模式（Chain-of-Responsibility）；"><a href="#职责链模式（Chain-of-Responsibility）；" class="headerlink" title="职责链模式（Chain of Responsibility）；"></a>职责链模式（Chain of Responsibility）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>典型的事例就是我们在Spring中的拦截器和Servlet中的Filter，它们都是现成的责任链模式。</p>
+</blockquote>
+<div class="col-xs-12">
+<img  src='/images/pattern/ResponsibilityChain.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`以下是示例代码：`
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> Handler successor;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Handler <span class="title">getSuccessor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> successor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSuccessor</span><span class="params">(Handler successor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.successor = successor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoggerHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(getSuccessor()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(getClass().getSimpleName()+<span class="string">&quot;,处理请求，并调用下一个处理者&quot;</span>);</span><br><span class="line">            getSuccessor().process();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(getClass().getSimpleName()+<span class="string">&quot;,仅处理，无下一处理者&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidateHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(getSuccessor()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(getClass().getSimpleName()+<span class="string">&quot;,处理请求，并调用下一个处理者&quot;</span>);</span><br><span class="line">            getSuccessor().process();</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(getClass().getSimpleName()+<span class="string">&quot;,仅处理，无下一处理者&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.responsibilitychain;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Handler validate = <span class="keyword">new</span> ValidateHandler();</span><br><span class="line">        Handler handler = <span class="keyword">new</span> LoggerHandler();</span><br><span class="line">        validate.setSuccessor(handler);</span><br><span class="line">        validate.process();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>输出：</code></p>
+<pre><code>ValidateHandler,处理请求，并调用下一个处理者
+LoggerHandler,仅处理，无下一处理者</code></pre>
+<h2 id="命令模式（Command）；"><a href="#命令模式（Command）；" class="headerlink" title="命令模式（Command）；"></a>命令模式（Command）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>将一个请求封装为一个对象,从而使你可用不同的请求对客户进行参数 化;对请求排队或记录请求日志,以及支持可取消的操作。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/java-my-life/archive/2012/06/01/2526972.html">AudioPlayer系统(转)</a></p>
+</blockquote>
+</blockquote>
+<p>  　　小女孩茱丽(Julia)有一个盒式录音机，此录音机有播音(Play)、倒带(Rewind)和停止(Stop)功能，录音机的键盘便是请求者(Invoker)角色；茱丽(Julia)是客户端角色，而录音机便是接收者角色。Command类扮演抽象命令角色，而PlayCommand、StopCommand和RewindCommand便是具体命令类。茱丽(Julia)不需要知道播音(play)、倒带(rewind)和停止(stop)功能是怎么具体执行的，这些命令执行的细节全都由键盘(Keypad)具体实施。茱丽(Julia)只需要在键盘上按下相应的键便可以了。</p>
+<p>  　　录音机是典型的命令模式。录音机按键把客户端与录音机的操作细节分割开来。</p>
+<div class="col-xs-12">
+<img  src='/images/pattern/command.png' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`以下是示例代码：`
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AudioPlay</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;播放....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rewind</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;倒带....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;停止....&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PlayCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AudioPlay audioPlay;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PlayCommand</span><span class="params">(AudioPlay audioPlay)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay = audioPlay;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay.play();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RewindCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AudioPlay audioPlay;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RewindCommand</span><span class="params">(AudioPlay audioPlay)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay = audioPlay;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay.rewind();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StopCommand</span> <span class="keyword">implements</span> <span class="title">Command</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AudioPlay audioPlay;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">StopCommand</span><span class="params">(AudioPlay audioPlay)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay = audioPlay;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.audioPlay.stop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Keypad</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Command playCommand;</span><br><span class="line">    <span class="keyword">private</span> Command rewindCommand;</span><br><span class="line">    <span class="keyword">private</span> Command stopCommand;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPlayCommand</span><span class="params">(Command playCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.playCommand = playCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRewindCommand</span><span class="params">(Command rewindCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.rewindCommand = rewindCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStopCommand</span><span class="params">(Command stopCommand)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stopCommand = stopCommand;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">play</span><span class="params">()</span></span>&#123;</span><br><span class="line">        playCommand.execute();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">rewind</span><span class="params">()</span></span>&#123;</span><br><span class="line">        rewindCommand.execute();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">stop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        stopCommand.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.command;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/29.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AudioPlay audioPlay = <span class="keyword">new</span> AudioPlay();</span><br><span class="line">        PlayCommand playCommand = <span class="keyword">new</span> PlayCommand(audioPlay);</span><br><span class="line">        RewindCommand rewindCommand = <span class="keyword">new</span> RewindCommand(audioPlay);</span><br><span class="line">        StopCommand stopCommand = <span class="keyword">new</span> StopCommand(audioPlay);</span><br><span class="line"></span><br><span class="line">        Keypad keypad=<span class="keyword">new</span> Keypad();</span><br><span class="line">        keypad.setPlayCommand(playCommand);</span><br><span class="line">        keypad.setRewindCommand(rewindCommand);</span><br><span class="line">        keypad.setStopCommand(stopCommand);</span><br><span class="line"></span><br><span class="line">        keypad.play();</span><br><span class="line">        keypad.rewind();</span><br><span class="line">        keypad.stop();</span><br><span class="line">        keypad.play();</span><br><span class="line">        keypad.stop();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>输出结果：</code></p>
+<pre><code>播放....
+倒带....
+停止....
+播放....
+停止....</code></pre>
+<h2 id="访问者模式（Visitor）；"><a href="#访问者模式（Visitor）；" class="headerlink" title="访问者模式（Visitor）；"></a>访问者模式（Visitor）；</h2><p>GoF这样定义:</p>
+<blockquote>
+<p>表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元<br>素的类的前提下定义作用于这些元素的新操作。</p>
+</blockquote>
+<div class="col-xs-12">
+<img  src='' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`以下是示例代码：`
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">## 调停者模式（Mediator）；</span><br><span class="line">GoF这样定义:</span><br><span class="line">&gt;用一个中介对象来封装一系列的对象交互。中介者使各对象不需要显式地相互引用,从而使其耦合松散,而且可以独立地改变它们之间的交互</span><br><span class="line"></span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-xs-12&quot;</span>&gt;</span><br><span class="line">&lt;img  src=<span class="string">&#x27;&#x27;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&#x27;col-lg-offset-3 col-lg-6 col-xs-12 thumbnail&#x27;</span>/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">`以下是示例代码：`</span><br><span class="line">```java</span><br></pre></td></tr></table></figure>
+## 备忘录模式（Memento）；
+GoF这样定义:
+> 在不破坏封装性的前提下,捕获一个对象的内部状态,并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。
+
+<div class="col-xs-12">
+<img  src='' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`以下是示例代码：`
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">## 迭代器模式（Iterator）；</span><br><span class="line">GoF这样定义:</span><br><span class="line">&gt;提供一种方法顺序访问一个聚合对象中各个元素,而又不需暴露该对象的内部表示。</span><br><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;col-xs-12&quot;</span>&gt;</span><br><span class="line">&lt;img  src=<span class="string">&#x27;&#x27;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&#x27;col-lg-offset-3 col-lg-6 col-xs-12 thumbnail&#x27;</span>/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">`以下是示例代码：`</span><br><span class="line">```java</span><br></pre></td></tr></table></figure>
+##解释器模式（Interpreter）
+GoF这样定义:
+>给定一个语言,定义它的文法的一种表示,并定义一个解释器,该解释器使用该表示来解释语言中的句子。
+
+<div class="col-xs-12">
+<img  src='' class='col-lg-offset-3 col-lg-6 col-xs-12 thumbnail'/>
+</div>
+`以下是示例代码：`
+```java
+```°
+
+
+
+
+        
+
+        
+            <div class="full-width auto-padding tags">
+                
+                    <a href="/tags/java/">java</a>
+                
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                
+            </div>
+        
+    </section>
+</article>
+
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+    <section class="meta">
+        
+            <h2 class="title">
                 <a href="/2015/09/13/%E5%B7%A5%E4%BD%9C%E4%B8%AD%E4%BD%BF%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E6%95%B4%E7%90%86/">
                     工作中使用的工具整理
                 </a>
@@ -1128,342 +1346,6 @@ cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
 
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-    <section class="meta">
-        
-            <h2 class="title">
-                <a href="/2015/09/02/Django+Mysql+%E5%AE%9E%E7%8E%B0%E5%91%A8%E8%BE%B9%E6%9F%A5%E8%AF%A2/">
-                    Django,Mysql,空间数据是通过Google地图和高德地图进行采集的
-                </a>
-            </h2>
-        
-        <time>
-            9月 2, 2015
-        </time>
-        
-    
-    <div class='cats'>
-        <a href="/categories/%E6%96%B9%E6%A1%88/">方案</a>
-    </div>
-
-    </section>
-    <section class="article typo">
-        <p>##环境</p>
-<p>Django,Mysql,空间数据是通过Google地图和高德地图进行采集的</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">$ mysql -V</span><br><span class="line">mysql  Ver <span class="number">14.14</span> Distrib <span class="number">5.6</span><span class="number">.20</span>, <span class="keyword">for</span> osx10<span class="number">.9</span> (x86_64) <span class="keyword">using</span>  EditLine <span class="keyword">wrapper</span></span><br></pre></td></tr></table></figure>
-
-<p>##需求描述</p>
-<p>mysql中存储了一些地理空间点类型的数，要进行周边查询。</p>
-<p>##MySQL空间相关的局限性</p>
-<p><a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.6/en/spatial-relation-functions.html">MySQL空间扩展的功能</a>仅支持包络框相关的操作(MySQL称之为最小边框，或简称为 MBR)。也就是说，MySQL符合OGC标准。</p>
-<blockquote>
-<p>目前,MySQL没有实现Contains,Crosses,Disjoint,Intersects,Overlaps,Touches函数，可以通过MBR来实现同样效果操作。</p>
-</blockquote>
-<p>也就是说，在MySQL进行如contains类似的空间查询时，可以通过bbcontains来实现同样效果的操作。</p>
-<p><code>注意：</code></p>
-<figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">只有MyISAM引擎的MySQL表才真正的支持空间索引<span class="comment">(R-trees)</span>。也就是说，当你要使用MySQL提供的空间扩展时，你要在快速查询空间数据和数据的完整性之间做一个选择 － MyISAM的表不支持事务和外键约束。</span><br></pre></td></tr></table></figure>
-
-
-<p>##数据库配置</p>
-<p>空间表引擎 Engine:InnoDB</p>
-<p>###创建数据库</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">mysql&gt;<span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> project_test@localhost IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;project_test&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>; </span><br><span class="line">mysql&gt;<span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> project_test@&quot;%&quot; IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;project_test&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span>; </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>第一句增加了一个 project_test 用户授权通过本地机（localhost)访问，密码“project_test”。</p>
-</li>
-<li><p>第二句则是授与 project_test 用户从任何其它主机发起的访问（通配符％）。 </p>
-</li>
-</ul>
-<p>###配置数据源</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="string">&#x27;default&#x27;</span>: &#123;</span><br><span class="line">    <span class="string">&#x27;ENGINE&#x27;</span>: <span class="string">&#x27;django.contrib.gis.db.backends.mysql&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;project_test&#x27;</span>,        # <span class="keyword">Or</span> <span class="type">path</span> <span class="keyword">to</span> <span class="keyword">database</span> file <span class="keyword">if</span> <span class="keyword">using</span> sqlite3.</span><br><span class="line">    <span class="string">&#x27;USER&#x27;</span>: <span class="string">&#x27;project_test&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;PASSWORD&#x27;</span>: <span class="string">&#x27;project_test&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;HOST&#x27;</span>: <span class="string">&#x27;127.0.0.1&#x27;</span>,           # Empty <span class="keyword">for</span> localhost through <span class="keyword">domain</span> sockets <span class="keyword">or</span> <span class="string">&#x27;127.0.0.1&#x27;</span> <span class="keyword">for</span> localhost through TCP.</span><br><span class="line">    <span class="string">&#x27;PORT&#x27;</span>: <span class="string">&#x27;3306&#x27;</span>,                # <span class="keyword">Set</span> <span class="keyword">to</span> empty string <span class="keyword">for</span> <span class="keyword">default</span>.</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>##数据模型的构建</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.gis.db <span class="keyword">import</span> models <span class="keyword">as</span> gismodels</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppPoint</span>(<span class="params">gismodels.Model</span>):</span></span><br><span class="line">    description = gismodels.TextField(verbose_name=_(<span class="string">u&quot;描述信息&quot;</span>), max_length=<span class="number">500</span>,</span><br><span class="line">                                      blank=<span class="literal">True</span>, null=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    point = gismodels.PointField(spatial_index=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    objects = gismodels.GeoManager()</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-<h2 id="Django-Geographic-framework-1-7"><a href="#Django-Geographic-framework-1-7" class="headerlink" title="Django Geographic framework 1.7"></a><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/">Django Geographic framework 1.7</a></h2><p><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/">GeoDjango</a>打算做世界级的地理学Web框架。它的目标是尽可能方便是的利用强大空间数据构建GIS Web 应用。</p>
-<p>###GeoQuerySet API</p>
-<p><code>class GeoQuerySet([model=None])</code></p>
-<p>####空间查询</p>
-<p>正如使用<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/models/querysets/#queryset-api">QuerySet API</a>时一样，在过滤器链(<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/topics/db/queries/#chaining-filters">chaining filters</a>)上加上GeoQuerySet进行筛选。除了通常的字段(<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/models/querysets/#field-lookups">Field lookups</a>)查询，它还提供了空间字段<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/model-api/#django.contrib.gis.db.models.GeometryField">GeometryField</a>的查询。</p>
-<p>可以在<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/db-api/#spatial-lookups-intro">这里</a>查看空间查询介绍</p>
-<p>下面Django对不同数据库 空间查询操作支持统计表：</p>
-<pre><code>    Lookup Type            PostGIS    Oracle    MySQL [7]    SpatiaLite
-
-    bbcontains            X                X             X
-    bboverlaps            X                 X             X
-    contained            X                 X             X
-    contains            X         X        X             X
-    contains_properly    X               
-    coveredby            X         X          
-    covers                X         X          
-    crosses                X                               X
-    disjoint            X         X        X             X
-    distance_gt            X         X                      X
-    distance_gte        X         X                      X
-    distance_lt            X         X                      X
-    distance_lte           X         X                      X
-    dwithin                X         X          
-    equals                X         X        X             X
-    exact                X         X        X             X
-    intersects            X         X        X             X
-    overlaps            X         X        X             X
-    relate                X         X                     X
-    same_as                X         X        X             X
-    touches                X         X        X             X
-    within                X         X        X             X
-    left                X               
-    right                X               
-    overlaps_left       X               
-    overlaps_right      X               
-    overlaps_above      X               
-    overlaps_below      X               
-    strictly_above      X               
-    strictly_below      X               </code></pre>
-<p>####我这里只关注一下对mysql的空间操作支持</p>
-<blockquote>
-<p>按我们的需要我们选用 <code>within</code></p>
-</blockquote>
-<ol>
-<li><p>bbcontains</p>
-<p> 支持：<code>PostGIS</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> 查询数据库中空间数据的bbox包含在指定的空间bbox内的数据。</p>
-<pre><code> 数据库         操作  
-
- PostGIS       poly ~ geom
- MySQL         MBRContains(poly,geom)
- SpatiaLite    MbrContains(poly,geom)</code></pre>
-</li>
-</ol>
-<ol start="2">
-<li><p>bboverlaps</p>
-<p> 支持：<code>PostGIS</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> 查询数据库中空间数据的bbox与指定的空间bbox相交的数据。</p>
-<pre><code> 数据库         操作  
-
- PostGIS       poly &amp;&amp; geom
- MySQL         MBROverlops(poly,geom)
- SpatiaLite    MbrOverlops(poly,geom)</code></pre>
-</li>
-<li><p>contained</p>
-<p> 支持：<code>PostGIS</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> 查询数据库中空间数据的bbox完全包含指定的空间bbox的数据。</p>
-<pre><code> 数据库         操作  
-
- PostGIS       poly @ geom
- MySQL         MBRWithin(poly,geom)
- SpatiaLite    MbrWithin(poly,geom)</code></pre>
-</li>
-<li><p>contains</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> Example:</p>
-<pre><code> Zipcode.objects.filter(poly__contains=geom)</code></pre>
-<p> 查询数据库中空间数据包含指定的空间图形的数据。</p>
-<pre><code> 数据库         操作  
-
- PostGIS       ST_Contains(poly, geom)
- Oracle        SDO_CONTAINS(poly, geom)
- MySQL         MBRContains(poly, geom)
- SpatiaLite    Contains(poly, geom)</code></pre>
-</li>
-</ol>
-<ol start="5">
-<li><p>disjoint</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> Example:</p>
-<pre><code> Zipcode.objects.filter(poly__disjoint=geom)</code></pre>
-<p> 查询数据库中与指定的空间图形相离的空间数据。</p>
-<pre><code> 数据库         操作  
-
- PostGIS       ST_Disjoint(poly, geom)
- Oracle        SDO_GEOM.RELATE(poly, geom)
- MySQL         MBRDisjoint(poly, geom)
- SpatiaLite    Disjoint(poly, geom)</code></pre>
-</li>
-<li><p>equals</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-</li>
-<li><p>exact，same_as</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-</li>
-<li><p>intersects</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p> 查询数据库中与指定的空间图形相交的空间数据。</p>
-<p> Example:</p>
-<pre><code>     Zipcode.objects.filter(poly__intersects=geom)</code></pre>
-</li>
-</ol>
-<pre><code>        数据库         操作  
-
-        PostGIS       ST_Intersects(poly, geom)
-        Oracle        SDO_OVERLAPBDYINTERSECT(poly, geom)
-        MySQL         MBRIntersects(poly, geom)
-        SpatiaLite    Intersects(poly, geom)</code></pre>
-<ol start="9">
-<li><p>overlaps</p>
-<p> 支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-</li>
-</ol>
-<ol start="10">
-<li><p>touches</p>
-<p>支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p>Example:</p>
-<pre><code>    Zipcode.objects.filter(poly__touches=geom)</code></pre>
-<p>查询与指定的空间几何图形相接的数据。</p>
-<pre><code>    数据库         操作  
-
-    PostGIS       ST_Touches(poly, geom)
-    Oracle        SDO_TOUCH(poly, geom)
-    MySQL         MBRTouches(poly, geom)
-    SpatiaLite    Touches(poly, geom)</code></pre>
-</li>
-<li><p>within</p>
-<p>支持：<code>PostGIS</code>,<code>Oracle</code>,<code>MySQL</code>,<code>SpatiaLite</code></p>
-<p>Example:</p>
-<pre><code>    Zipcode.objects.filter(poly__within=geom)</code></pre>
-<p>查询包含在指定的空间几何图形中的数据。</p>
-<pre><code>    数据库         操作  
-
-    PostGIS       ST_Within(poly, geom)
-    Oracle        SDO_INSIDE(poly, geom)
-    MySQL         MBRWithin(poly, geom)
-    SpatiaLite    Within(poly, geom)</code></pre>
-</li>
-</ol>
-<blockquote>
-<p>现在知道了要用 within 来查询数据，另一个问题来了，如何生成半径大小为R中心坐标为(x,y)的geom呢。</p>
-</blockquote>
-<p>####创建空间几何图形</p>
-<p>可以通过多种方式创建<a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/geos/#django.contrib.gis.geos.GEOSGeometry">GeosGeometry</a>。第一种方法，就是通过一些参数直接实例化。</p>
-<ul>
-<li>下面是分别通过WKT,HEX,WKB和GeoJSON方式直接创建 Geometry 的方法：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">30</span>]: pnt = GEOSGeometry(<span class="string">&#x27;POINT(5 23)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">31</span>]: pnt = GEOSGeometry(<span class="string">&#x27;010100000000000000000014400000000000003740&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">32</span>]: pnt = GEOSGeometry(buffer(<span class="string">&#x27;\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x14@\x00\x00\x00\x00\x00\x007@&#x27;</span>))</span><br><span class="line"></span><br><span class="line">In [<span class="number">33</span>]: pnt = GEOSGeometry(<span class="string">&#x27;&#123; &quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [ 5.000000, 23.000000 ] &#125;&#x27;</span>) <span class="comment"># GeoJSON   </span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>另一种方式就是通过特定类型的空间几何对象的构造器来进行创建该类型的Geometry实例</li>
-</ul>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">In [<span class="number">34</span>]: <span class="keyword">from</span> django.contrib.gis.geos <span class="keyword">import</span> Point</span><br><span class="line"></span><br><span class="line">In [<span class="number">35</span>]: pnt = Point(<span class="number">5</span>,<span class="number">23</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">36</span>]: pnt</span><br><span class="line">Out[<span class="number">36</span>]: &lt;Point object at <span class="number">0x10735bb50</span>&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>最后一种方法就是通过 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/geos/#django.contrib.gis.geos.fromstr">fromstr()</a>和 <a target="_blank" rel="noopener" href="https://docs.djangoproject.com/en/1.7/ref/contrib/gis/geos/#django.contrib.gis.geos.fromfile">fromfile</a> 工厂方法来创建Geometry实例。它们分别接收字符串或文件</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">37</span>]: <span class="keyword">from</span> django.contrib.gis.geos <span class="keyword">import</span> fromstr,fromfile</span><br><span class="line"></span><br><span class="line">In [<span class="number">38</span>]: pnt = fromstr(<span class="string">&#x27;POINT(5 23)&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">39</span>]: pnt = fromfile(<span class="string">&#x27;/path/to/pnt.wkt&#x27;</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">34</span>]: pnt = fromfile(open(<span class="string">&#x27;/path/to/pnt.wkt&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>####实现查询周边几何点的功能</p>
-<blockquote>
-<p>通过上面的学习，在Django中实现mysql数据的周边查询只能通过模糊的查询，<br>我们这里通过构建一个包络框进行模糊查询：</p>
-</blockquote>
-<ul>
-<li>构建一个包络框</li>
-</ul>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.gis.geos <span class="keyword">import</span> (<span class="type">Polygon</span>,<span class="type">Point</span>)</span><br><span class="line"></span><br><span class="line"><span class="type">point</span> = <span class="type">Point</span>(<span class="number">130</span>,<span class="number">39</span>)</span><br><span class="line"></span><br><span class="line">buffer=<span class="type">point</span>.buffer(degree)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>进行within查询</li>
-</ul>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="module-access"><span class="module"><span class="identifier">AppPoint</span>.</span></span>objects.filter(point__within=buffer)</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>问题</li>
-</ul>
-<p>这里给的半径通常是米为km，但是这个构建buffer的方法需要的参数是一个度。</p>
-<pre><code>degree=l*180/(math.pi*6371)</code></pre>
-<p>##测试方法和数据</p>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="function">def <span class="title">get_point</span><span class="params">(<span class="built_in">point</span>,r)</span>:</span></span><br><span class="line"><span class="function">    EARTH_R</span>=<span class="number">6378.137</span></span><br><span class="line">    <span class="built_in">buffer</span> = <span class="built_in">point</span>.<span class="built_in">buffer</span>(r*<span class="number">180</span>/(math.pi*EARTH_R))</span><br><span class="line">    aps=AppPoint.objects.filter(point__within=<span class="built_in">buffer</span>)</span><br><span class="line">    <span class="keyword">for</span> ap in aps:</span><br><span class="line">        <span class="built_in">print</span> ap.<span class="built_in">point</span>.json,(math.pi*EARTH_R*ap.<span class="built_in">point</span>.distance(<span class="built_in">point</span>)/<span class="number">180</span>)</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-<p>其中点与点间的距离方法distance在django中解释为：</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">Returns the distance between the closest points on this Geometry</span><br><span class="line"><span class="keyword">and</span> the other. Units will be <span class="keyword">in</span> those of the coordinate<span class="built_in"> system </span>of</span><br><span class="line">the Geometry.</span><br></pre></td></tr></table></figure>
-
-<p>下面是测试数据：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">b</span> <span class="string">=</span> [[<span class="number">116.27497</span>,<span class="number">39.95708</span>,<span class="number">2573</span>],</span><br><span class="line">[<span class="number">116.48103</span>,<span class="number">39.96657</span>,<span class="number">4292</span>],</span><br><span class="line"><span class="string">...</span></span><br><span class="line">[<span class="number">116.13621</span>,<span class="number">39.92686</span>,<span class="number">528</span>],</span><br><span class="line">[<span class="number">116.39494</span>,<span class="number">39.87986</span>,<span class="number">138</span>],</span><br><span class="line">[<span class="number">116.389</span>,<span class="number">39.8799</span>,<span class="number">2151</span>],</span><br><span class="line">[<span class="number">116.4858</span>,<span class="number">39.9361</span>,<span class="number">4709</span>]</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">创建数据：</span></span><br><span class="line"><span class="attr">for b in a:</span>                                   </span><br><span class="line">    <span class="string">AppPoint.objects.create(description=b.count,point=Point(b[0],b[1]))</span></span><br><span class="line">    </span><br><span class="line"><span class="string">输出结果：</span></span><br><span class="line"> <span class="string">get_point(Point(116.4,39.8),8)</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.4214</span>, <span class="number">39.85925</span> ] &#125; <span class="number">7.01270604176</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.33663</span>, <span class="number">39.79076</span> ] &#125; <span class="number">7.1289114023</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.43555</span>, <span class="number">39.80307</span> ] &#125; <span class="number">3.97213681829</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.42803</span>, <span class="number">39.86696</span> ] &#125; <span class="number">8.08069287815</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.41776</span>, <span class="number">39.8526</span> ] &#125; <span class="number">6.18016458489</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.41467</span>, <span class="number">39.86627</span> ] &#125; <span class="number">7.5557334976</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.37254</span>, <span class="number">39.82765</span> ] &#125; <span class="number">4.33799658047</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.36128</span>, <span class="number">39.85648</span> ] &#125; <span class="number">7.62292984489</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.41574</span>, <span class="number">39.80051</span> ] &#125; <span class="number">1.75308830872</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.40075</span>, <span class="number">39.81592</span> ] &#125; <span class="number">1.77417182449</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.45339</span>, <span class="number">39.83341</span> ] &#125; <span class="number">7.01111345466</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.39799</span>, <span class="number">39.84366</span> ] &#125; <span class="number">4.86535674431</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.38116</span>, <span class="number">39.85952</span> ] &#125; <span class="number">6.94973919946</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.3385</span>, <span class="number">39.82914</span> ] &#125; <span class="number">7.57577153659</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.3777</span>, <span class="number">39.86207</span> ] &#125; <span class="number">7.34200348969</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.39454</span>, <span class="number">39.86518</span> ] &#125; <span class="number">7.28121719546</span></span><br><span class="line">&#123; <span class="attr">&quot;type&quot;:</span> <span class="string">&quot;Point&quot;</span>, <span class="attr">&quot;coordinates&quot;:</span> [ <span class="number">116.41095</span>, <span class="number">39.84127</span> ] &#125; <span class="number">4.75311465912</span></span><br></pre></td></tr></table></figure>
-
-<p>##总结</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">    <span class="keyword">from</span> django.contrib.gis.geos <span class="keyword">import</span> (<span class="type">Polygon</span>,<span class="type">Point</span>)</span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line">    <span class="type">point</span> = <span class="type">Point</span>(<span class="number">130</span>,<span class="number">39</span>)</span><br><span class="line">    EARTH_R=<span class="number">6378.137</span></span><br><span class="line">    buffer = <span class="type">point</span>.buffer(r*<span class="number">180</span>/(math.pi*EARTH_R))</span><br><span class="line">    aps=AppPoint.objects.<span class="keyword">filter</span>(point__within=buffer)</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">##新的问题</span><br><span class="line">###上面这种方法得到的是没有排序的结果，目前要进行由近到远进行排序，通过</span><br><span class="line">`SQRT(POW( ABS( X(<span class="keyword">Location</span>) – X(@center)), <span class="number">2</span>) + POW(ABS(Y(<span class="keyword">Location</span>) – Y(@center)), <span class="number">2</span>))`得到一个大致的距离因子，然后根据这个进行排序。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>queryset.extra(select={‘distance_factor’: “SQRT(POWER(ABS(X(point) - “+str(x)+”),2) + POWER(ABS(Y(point) - “+str(y)+”),2))”}).order_by(‘distance_factor’)</p>
-<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">###在线上遇到了下面的问题：</span><br></pre></td></tr></table></figure>
-<p>rps[0].point.distance(rps[1].point)<br>python: GeometryComponentFilter.cpp:35: virtual void geos::geom::GeometryComponentFilter::filter_ro(const geos::geom::Geometry*): Assertion `0’ failed.</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line">线上直接使用<span class="selector-tag">distance</span>时报错。</span><br><span class="line"></span><br><span class="line">然后比较了一下<span class="selector-tag">python</span>的<span class="selector-tag">distance</span>得到的值，其实是和`<span class="selector-tag">SQRT</span>(POW( ABS( X(Location) – X(<span class="variable">@center</span>)), <span class="number">2</span>) + POW(ABS(Y(Location) – Y(<span class="variable">@center</span>)), <span class="number">2</span>))`得到的值是一样的。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>(‘…..python’, 0.0071949078163964595)<br>(‘self’, 0.0071949078163964595)</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">故处些最终到终心点的距离使用了 <span class="code">`distance_factor`</span> 来代替。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">##注意</span></span><br><span class="line"></span><br><span class="line"><span class="section">###[<span class="string">经纬度坐标系采用GCJ-2标准,对于Google,高德地图和腾讯地图可以直接使用</span>](<span class="link">http://wangsheng2008love.blog.163.com/blog/static/78201689201461674727642/</span>)</span></span><br><span class="line"><span class="section">###地球坐标系 (WGS-84) 到火星坐标系 (GCJ-02) 的转换算法</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section">####下面是通过html5获取坐标，然后转化后的当前我的位置截图</span></span><br><span class="line">![<span class="string">loading</span>](<span class="link">/images/project/xy_trans_position.png =x400</span>)</span><br><span class="line"><span class="section">####腾讯高德对其转化都有现成的实现</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<pre><code>    var a = 6378245.0
-    var ee = 0.00669342162296594323
-
-    function out_of_china(lat,lon)&#123;
-        if (lon &lt; 72.004 || lon &gt; 137.8347)
-            return true
-        if (lat &lt; 0.8293 || lat &gt; 55.8271)
-            return true
-    &#125;
-    function transformlat(x, y) &#123;
-
-        var result = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x))
-        result += (20.0 * Math.sin(6.0 * Math.PI * x) + 20.0 * Math.sin(2.0 * Math.PI * x)) * 2.0 / 3.0
-        result += (20.0 * Math.sin(Math.PI * y) + 40.0 * Math.sin(Math.PI / 3.0 * y)) * 2.0 / 3.0
-        result += (160.0 * Math.sin(Math.PI / 12.0 * y) + 320.0 * Math.sin(Math.PI / 30.0 * y)) * 2.0 / 3.0
-        return result
-    &#125;
-    function transformlon(x, y) &#123;
-        var result = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x))
-        result += (20.0 * Math.sin(6.0 * Math.PI * x) + 20.0 * Math.sin(2.0 * Math.PI * x)) * 2.0 / 3.0
-        result += (20.0 * Math.sin(Math.PI * x) + 40.0 * Math.sin(Math.PI / 3.0 * x)) * 2.0 / 3.0
-        result += (150.0 * Math.sin(Math.PI / 12.0 * x) + 300.0 * Math.sin(Math.PI / 30.0 * x)) * 2.0 / 3.0
-        return result
-    &#125;
-
-    function wgs2gcj(wgslat, wgslon) &#123;
-        if (out_of_china(wgslat, wgslon)) &#123;
-            return [wgslat, wgslon]
-        &#125;
-        var lat = transformlat(wgslon - 105.0, wgslat - 35.0)
-        var lon = transformlon(wgslon - 105.0, wgslat - 35.0)
-        var rad_lat = Math.PI / 180.0 * wgslat
-       var  magic = Math.sin(rad_lat)
-        magic = 1 - ee * magic * magic
-        var sqrt_magic = Math.sqrt(magic)
-        lat = (180.0 * lat) / (Math.PI * (a * (1 - ee)) / (magic * sqrt_magic))
-        lon = (180.0 * lon) / (Math.PI * a * Math.cos(rad_lat) / sqrt_magic)
-        var chnlat = wgslat + lat
-        var chnlon = wgslon + lon
-        return [chnlat, chnlon]
-    &#125;</code></pre>
-<pre><code>
-##参考
-&gt;0. [JAVSCRIPT Math](http://www.w3school.com.cn/jsref/jsref_obj_math.asp)
-
-&gt;1. [MySQL空间数据库–查询点到多点间的最短路径](http://www.javabloger.com/article/mysql-spatial-database.html)
-
-&gt;2. [W3 Geolocation API Specification](http://www.w3.org/TR/geolocation-API/#position_interface)
-
-&gt;3. [关于百度map和高德map，关于map坐标系](http://wangsheng2008love.blog.163.com/blog/static/78201689201461674727642/)
-
-&gt;4. [iOS 火星坐标相关整理及解决方案汇总](http://it.taocms.org/04/507.htm)
-
-</code></pre>
-
-
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/python/">python</a>
-                
-                    <a href="/tags/GIS/">GIS</a>
-                
-                    <a href="/tags/mysql/">mysql</a>
-                
-            </div>
-        
-    </section>
-</article>
-
-    </div>
-  
 </section>
 
 
@@ -1535,6 +1417,8 @@ cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
     
         <li><a class="flat-box" href="/categories/%E6%8A%80%E6%9C%AF/%E7%AE%97%E6%B3%95/"><div class='name'>算法</div><div class='badget'>1</div></a></li>
     
+        <li><a class="flat-box" href="/categories/%E8%89%BA%E6%9C%AF/"><div class='name'>艺术</div><div class='badget'>1</div></a></li>
+    
         <li><a class="flat-box" href="/categories/%E6%8A%80%E6%9C%AF/%E8%AF%AD%E8%A8%80/"><div class='name'>语言</div><div class='badget'>1</div></a></li>
     
         <li><a class="flat-box" href="/categories/%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/"><div class='name'>读书学习</div><div class='badget'>5</div></a></li>
@@ -1551,7 +1435,7 @@ cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
 <div class="m_widget tagcloud">
     <div class="header">标签云</div>
     <div class='content'>
-        <a href="/tags/CAP/" style="font-size: 15.2px; color: #666">CAP</a> <a href="/tags/GIS/" style="font-size: 14px; color: #808080">GIS</a> <a href="/tags/Protobuf/" style="font-size: 14px; color: #808080">Protobuf</a> <a href="/tags/alfred/" style="font-size: 14px; color: #808080">alfred</a> <a href="/tags/angularjs/" style="font-size: 16.4px; color: #4d4d4d">angularjs</a> <a href="/tags/ansible/" style="font-size: 14px; color: #808080">ansible</a> <a href="/tags/arm/" style="font-size: 14px; color: #808080">arm</a> <a href="/tags/book/" style="font-size: 15.2px; color: #666">book</a> <a href="/tags/bug/" style="font-size: 14px; color: #808080">bug</a> <a href="/tags/django/" style="font-size: 14px; color: #808080">django</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #808080">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 14px; color: #808080">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 14px; color: #808080">fastfs</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/ionic/" style="font-size: 16.4px; color: #4d4d4d">ionic</a> <a href="/tags/java/" style="font-size: 20px; color: #000">java</a> <a href="/tags/jdk/" style="font-size: 14px; color: #808080">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 15.2px; color: #666">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 14px; color: #808080">jmeter</a> <a href="/tags/linux/" style="font-size: 14px; color: #808080">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 14px; color: #808080">linux命令</a> <a href="/tags/mac/" style="font-size: 15.2px; color: #666">mac</a> <a href="/tags/maven/" style="font-size: 14px; color: #808080">maven</a> <a href="/tags/mp3/" style="font-size: 14px; color: #808080">mp3</a> <a href="/tags/mysql/" style="font-size: 14px; color: #808080">mysql</a> <a href="/tags/nginx/" style="font-size: 14px; color: #808080">nginx</a> <a href="/tags/nocomment/" style="font-size: 14px; color: #808080">nocomment</a> <a href="/tags/poi/" style="font-size: 14px; color: #808080">poi</a> <a href="/tags/python/" style="font-size: 16.4px; color: #4d4d4d">python</a> <a href="/tags/redis/" style="font-size: 15.2px; color: #666">redis</a> <a href="/tags/rpc/" style="font-size: 14px; color: #808080">rpc</a> <a href="/tags/rsa/" style="font-size: 14px; color: #808080">rsa</a> <a href="/tags/schedule/" style="font-size: 14px; color: #808080">schedule</a> <a href="/tags/workflow/" style="font-size: 14px; color: #808080">workflow</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #808080">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #808080">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 15.2px; color: #666">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 14px; color: #808080">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #808080">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 14px; color: #808080">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 14px; color: #808080">健康</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 17.6px; color: #333">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 14px; color: #808080">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 15.2px; color: #666">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16.4px; color: #4d4d4d">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 14px; color: #808080">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 14px; color: #808080">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14px; color: #808080">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #808080">并发</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15.2px; color: #666">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #808080">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 15.2px; color: #666">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 14px; color: #808080">查找</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 14px; color: #808080">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 15.2px; color: #666">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.8px; color: #1a1a1a">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 14px; color: #808080">经验</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 15.2px; color: #666">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.4px; color: #4d4d4d">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 14px; color: #808080">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 14px; color: #808080">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 15.2px; color: #666">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 14px; color: #808080">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 14px; color: #808080">音频转换</a>
+        <a href="/tags/CAP/" style="font-size: 15.2px; color: #666">CAP</a> <a href="/tags/GIS/" style="font-size: 14px; color: #808080">GIS</a> <a href="/tags/Protobuf/" style="font-size: 14px; color: #808080">Protobuf</a> <a href="/tags/alfred/" style="font-size: 14px; color: #808080">alfred</a> <a href="/tags/angularjs/" style="font-size: 16.4px; color: #4d4d4d">angularjs</a> <a href="/tags/ansible/" style="font-size: 14px; color: #808080">ansible</a> <a href="/tags/arm/" style="font-size: 14px; color: #808080">arm</a> <a href="/tags/book/" style="font-size: 15.2px; color: #666">book</a> <a href="/tags/bug/" style="font-size: 14px; color: #808080">bug</a> <a href="/tags/django/" style="font-size: 14px; color: #808080">django</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #808080">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 14px; color: #808080">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 14px; color: #808080">fastfs</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/ionic/" style="font-size: 16.4px; color: #4d4d4d">ionic</a> <a href="/tags/java/" style="font-size: 20px; color: #000">java</a> <a href="/tags/jdk/" style="font-size: 14px; color: #808080">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 15.2px; color: #666">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 14px; color: #808080">jmeter</a> <a href="/tags/linux/" style="font-size: 14px; color: #808080">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 14px; color: #808080">linux命令</a> <a href="/tags/mac/" style="font-size: 15.2px; color: #666">mac</a> <a href="/tags/maven/" style="font-size: 14px; color: #808080">maven</a> <a href="/tags/mp3/" style="font-size: 14px; color: #808080">mp3</a> <a href="/tags/mysql/" style="font-size: 14px; color: #808080">mysql</a> <a href="/tags/nginx/" style="font-size: 14px; color: #808080">nginx</a> <a href="/tags/nocomment/" style="font-size: 14px; color: #808080">nocomment</a> <a href="/tags/poi/" style="font-size: 14px; color: #808080">poi</a> <a href="/tags/python/" style="font-size: 16.4px; color: #4d4d4d">python</a> <a href="/tags/redis/" style="font-size: 15.2px; color: #666">redis</a> <a href="/tags/rpc/" style="font-size: 14px; color: #808080">rpc</a> <a href="/tags/rsa/" style="font-size: 14px; color: #808080">rsa</a> <a href="/tags/schedule/" style="font-size: 14px; color: #808080">schedule</a> <a href="/tags/workflow/" style="font-size: 14px; color: #808080">workflow</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #808080">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #808080">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 15.2px; color: #666">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 14px; color: #808080">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #808080">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 14px; color: #808080">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 14px; color: #808080">健康</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 17.6px; color: #333">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 14px; color: #808080">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 15.2px; color: #666">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16.4px; color: #4d4d4d">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 14px; color: #808080">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 14px; color: #808080">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14px; color: #808080">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #808080">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 14px; color: #808080">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15.2px; color: #666">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #808080">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 15.2px; color: #666">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 14px; color: #808080">查找</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 14px; color: #808080">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 15.2px; color: #666">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.8px; color: #1a1a1a">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 14px; color: #808080">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 14px; color: #808080">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 15.2px; color: #666">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.4px; color: #4d4d4d">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 14px; color: #808080">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 14px; color: #808080">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 15.2px; color: #666">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 14px; color: #808080">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 14px; color: #808080">音频转换</a>
     </div>
 </div>
 
