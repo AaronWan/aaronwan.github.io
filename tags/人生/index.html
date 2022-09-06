@@ -166,7 +166,8 @@
 <blockquote>
 <p>解决办法: 修改hexo权限即可</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  wansongblog git:(master) ✗ which hexo</span><br><span class="line">/usr/local/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ ll /usr/local/bin/hexo</span><br><span class="line">lrwxr-xr-x  1 root  wheel  37 Sep  4 05:24 /usr/local/bin/hexo -&gt; ../lib/node_modules/hexo-cli/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ cd  /usr/local/bin/</span><br><span class="line">➜  bin cd ../lib/node_modules</span><br><span class="line">➜  node_modules chmod +R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: +R</span><br><span class="line">➜  node_modules chmod R 777 hexo-cli </span><br><span class="line">chmod: Invalid file mode: R</span><br><span class="line">➜  node_modules sudo chmod -r 777 hexo-cli</span><br><span class="line">Password:</span><br><span class="line">chmod: 777: No such file or directory</span><br><span class="line">➜  node_modules sudo chmod -R 777 hexo-cli</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  wansongblog git:(master) ✗ which hexo</span><br><span class="line">/usr/local/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ ll /usr/local/bin/hexo</span><br><span class="line">lrwxr-xr-x  1 root  wheel  37 Sep  4 05:24 /usr/local/bin/hexo -&gt; ../lib/node_modules/hexo-cli/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ cd  /usr/local/bin/</span><br><span class="line">➜  bin cd ../lib/node_modules</span><br><span class="line">➜  node_modules sudo chmod -R 777 hexo-cli</span><br></pre></td></tr></table></figure>
+
 
         
 
