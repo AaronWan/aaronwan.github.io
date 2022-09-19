@@ -132,6 +132,208 @@
     <section class="meta">
         
             <h2 class="title">
+                <a href="/2015/09/13/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E7%BB%93%E6%9E%84%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
+                    设计模式之结构型模式
+                </a>
+            </h2>
+        
+        <time>
+            9月 13, 2015
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+    </div>
+
+    </section>
+    <section class="article typo">
+        <p>##结构型模式</p>
+<p>描述在面向对象设计中，类和对象的几种结构关系，设计好了会为后续代码的维护带来很大的方便。</p>
+<ul>
+<li>外观模式（Facade）；</li>
+<li>适配器模式（Adapter）；</li>
+<li>代理模式（Proxy）；</li>
+<li>装饰模式（Decorator）；</li>
+<li>桥模式（Bridge）；</li>
+<li>组合模式（Composite）；</li>
+<li>享元模式（Flyweight）;</li>
+</ul>
+<p>###外观模式（Facade）又称门面模式；<br>GoF这样定义:</p>
+<blockquote>
+<p>为子系统中的一组接口提供一个一致的界面, Facade 模式定义了一个高层 接口,这个接口使得这一子系统更加容易使用。</p>
+</blockquote>
+<p>外观模式，在我理解就是给一组对象提供一个对外统计的操作方式 ，让外部使用者不用操心内部工作。如一个汽车，一个电脑，你点开机，硬盘，CPU，内存，显卡就都开始工作了，关机时也一样。这里对我们操作者来说其实就是一个开关。</p>
+<img  src='/images/pattern/facade.png' class='col-xs-12 thumbnail'/>
+``
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> InterruptedException</span>&#123;</span><br><span class="line">        Computer computer=<span class="keyword">new</span> Computer();</span><br><span class="line">        computer.startup();</span><br><span class="line">        System.out.println(<span class="string">&quot;--------shutdown-----------&quot;</span>);</span><br><span class="line">        computer.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Computer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> CPU cpu;</span><br><span class="line">    <span class="keyword">private</span> Memory memory;</span><br><span class="line">    <span class="keyword">private</span> GraphicsCard graphicsCard;</span><br><span class="line">    <span class="keyword">private</span> Disk disk;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Computer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cpu = <span class="keyword">new</span> CPU();</span><br><span class="line">        <span class="keyword">this</span>.memory = <span class="keyword">new</span> Memory();</span><br><span class="line">        <span class="keyword">this</span>.graphicsCard = <span class="keyword">new</span> GraphicsCard();</span><br><span class="line">        <span class="keyword">this</span>.disk = <span class="keyword">new</span> Disk();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cpu.startup();</span><br><span class="line">        <span class="keyword">this</span>.memory.startup();</span><br><span class="line">        <span class="keyword">this</span>.disk.startup();</span><br><span class="line">        <span class="keyword">this</span>.graphicsCard.startup();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.graphicsCard.shutdown();</span><br><span class="line">        <span class="keyword">this</span>.disk.shutdown();</span><br><span class="line">        <span class="keyword">this</span>.memory.shutdown();</span><br><span class="line">        <span class="keyword">this</span>.cpu.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CPU</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;启动&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Disk</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;启动&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GraphicsCard</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;启动&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Memory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startup</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;启动&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shutdown</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;关闭&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<pre><code>CPU启动
+Memory启动
+Disk启动
+GraphicsCard启动
+--------shutdown-----------
+GraphicsCard关闭
+Disk关闭
+Memory关闭
+CPU关闭</code></pre>
+<p>###适配器模式（Adapter）；<br>GoF这样定义:</p>
+<blockquote>
+<p>将一个类的接口转换成客户希望的另外一个接口。 Adapter 模式使得原本 由于接口不兼容而不能一起工作的那些类可以一起工作。</p>
+</blockquote>
+<p>我的事例理解：如咱们家中常用的洗衣机，当我们要与我们的水龙头进行对接时，中间要借助一个中间者“转换头”，它在这里就起到了适配作用。</p>
+<img  src='/images/pattern/adapter1.png' class='col-xs-12 thumbnail'/>
+``
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.adapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WashingMachine</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">connectPort</span><span class="params">(IWashFaucetAdapter washportadapter)</span></span>&#123;</span><br><span class="line">        System.out.print(washportadapter.outToWashingPort()+<span class="string">&quot; success!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.adapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IWashFaucetAdapter</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">outToWashingPort</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.adapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WashingFaucetAdapter</span> <span class="keyword">extends</span> <span class="title">Faucet</span> <span class="keyword">implements</span> <span class="title">IWashFaucetAdapter</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">outToWashingPort</span><span class="params">()</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span>  <span class="string">&quot;transform&quot;</span>+<span class="keyword">this</span>.port()+<span class="string">&quot; to washing port!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.adapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> * 水龙头</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Faucet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">port</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.print(<span class="string">&quot;facucet port .....&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;facucet port&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.adapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"><span class="comment">//        创建水龙头、洗衣机、镶接头</span></span><br><span class="line">        WashingMachine washingMachine=<span class="keyword">new</span> WashingMachine();</span><br><span class="line">        WashingFaucetAdapter washingFaucetAdapter= <span class="keyword">new</span> WashingFaucetAdapter();</span><br><span class="line"><span class="comment">//        进行适配</span></span><br><span class="line">        washingMachine.connectPort(washingFaucetAdapter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<pre><code>facucet port .....transformfacucet port to washing port! success!</code></pre>
+<p>###代理模式（Proxy）；<br>GoF这样定义:</p>
+<blockquote>
+<p>为其他对象提供一个代理以控制对这个对象的访问。</p>
+</blockquote>
+<p>这里就以找工作为例吧，现在我们找工作都会通过找工作平台来进行找工作，因为他们有资源，他们比较专业。我们告诉他们要找什么样的工作他们就会给我们推荐什么样的工作，在这个环节中，类似51job,100offer这样的平台就是所谓的招聘代理。<br>他代理公司进行招人。同时也方便了我们去找工作。</p>
+<img  src='/images/pattern/adapter1.png' class='col-xs-12 thumbnail'/>
+
+<p><code>下面是代码实现：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IRecruitment</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">recruitment</span><span class="params">(String user)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FounderWork</span> <span class="keyword">implements</span> <span class="title">IRecruitment</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recruitment</span><span class="params">(String user)</span></span>&#123;</span><br><span class="line">       System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot;招聘员工&quot;</span>+user+<span class="string">&quot;成功！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkProxy</span> <span class="keyword">implements</span> <span class="title">IRecruitment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IRecruitment recruitment;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WorkProxy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.recruitment = <span class="keyword">new</span> FounderWork();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">recruitment</span><span class="params">(String user)</span> </span>&#123;</span><br><span class="line">        before();</span><br><span class="line">        <span class="keyword">this</span>.recruitment.recruitment(user);</span><br><span class="line">        after();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;进行招聘前工作准备！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName() + <span class="string">&quot;进行招聘完成后工作收尾！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> WorkProxy().recruitment(<span class="string">&quot;Aaron&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<pre><code>WorkProxy进行招聘前工作准备！
+FounderWork招聘员工Aaron成功！
+WorkProxy进行招聘完成后工作收尾！</code></pre>
+<p>###装饰模式（Decorator）；<br>GoF这样定义:</p>
+<blockquote>
+<p>动态地给一个对象添加一些额外的职责。就扩展功能而言, Decorator 模 式比生成子类方式更为灵活。</p>
+</blockquote>
+<p>我们可以拿我们的扩音器为例，假如一个mp3的有声音，那么它的声音不是很大，稍微远一点我们就不能听到了，这里就会用一个扩音器，放在mp3旁边，离稍微远点也能享受音乐的快乐了。</p>
+<p>这里，扩音器就是装饰器，他使mp3的声音变大。有时扩音器也可以改变声音的音质，变的更好听。</p>
+<img  src='/images/pattern/decorator.png' class='col-xs-12 thumbnail'/>
+
+<p><code>下面是代码实现：</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.decorator;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ISoundable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.decorator;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MP3</span> <span class="keyword">implements</span> <span class="title">ISoundable</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;small sound from mp3!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.decorator;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SoundDecorator</span> <span class="keyword">implements</span> <span class="title">ISoundable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ISoundable soundable;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SoundDecorator</span><span class="params">(ISoundable soundable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.soundable = soundable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sound</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.soundable.sound();</span><br><span class="line">        System.out.println(<span class="string">&quot;make sound beautiful&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;make sound aloud &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.decorator;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> SoundDecorator(<span class="keyword">new</span> MP3()).sound();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<pre><code>small sound from mp3!
+make sound beautiful
+make sound aloud </code></pre>
+<p>###桥接模式（Bridge）；<br>GoF这样定义:</p>
+<blockquote>
+<p>将抽象部分与它的实现部分分离,使它们都可以独立地变化。</p>
+</blockquote>
+<p>这里还举一个生活中常用到的例子，洗衣机有多种，但我们当我们没有接到水龙头上的管子时，我们可以去商店里买，这里可能会有大小长短各不相同的管子，但都可以与我们的洗衣机相连接进行使用。</p>
+<p>这里我们变化的是多种洗衣机和多种管子，我们为洗衣机做一个抽像类。可以设置不同的管子。</p>
+<img  src='/images/pattern/bridge.png' class='col-xs-12 thumbnail'/>
+``
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IPip</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">color</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> * 水龙头</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedPip</span> <span class="keyword">implements</span> <span class="title">IPip</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">color</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Red&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> * 水龙头</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BluePip</span> <span class="keyword">implements</span> <span class="title">IPip</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">color</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;blue pip&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractWashingMachine</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IPip pip;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IPip <span class="title">getPip</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPip</span><span class="params">(IPip pip)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pip = pip;</span><br><span class="line">        System.out.println(<span class="keyword">this</span>.getClass().getSimpleName()+<span class="string">&quot; set &quot;</span>+pip.color()+<span class="string">&quot; &quot;</span>+pip.getClass().getSimpleName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChinaWashingMachine</span> <span class="keyword">extends</span> <span class="title">AbstractWashingMachine</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HaierWashingMachine</span> <span class="keyword">extends</span> <span class="title">AbstractWashingMachine</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.bridge;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> HaierWashingMachine().setPip(<span class="keyword">new</span> BluePip());</span><br><span class="line">        <span class="keyword">new</span> HaierWashingMachine().setPip(<span class="keyword">new</span> RedPip());</span><br><span class="line">        <span class="keyword">new</span> ChinaWashingMachine().setPip(<span class="keyword">new</span> BluePip());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<pre><code>HaierWashingMachine set blue pip BluePip
+HaierWashingMachine set Red RedPip
+ChinaWashingMachine set blue pip BluePip</code></pre>
+<p>###组合模式（Composite）；<br>GoF这样定义:</p>
+<blockquote>
+<p>将对象组合成树形结构以表示“部分-整体”的层次结构。Composite使 得客户对单个对象和复合对象的使用具有一致性。</p>
+</blockquote>
+<p>这里我们最常见的就是公司与部门的关系，其实就是整体与部分的关系。</p>
+<img  src='/images/pattern/composite.png' class='col-xs-12 thumbnail'/>
+
+<p><code>代码</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.composite;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractCompany</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Vector&lt;AbstractCompany&gt; companys=<span class="keyword">new</span> Vector&lt;AbstractCompany&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">(<span class="keyword">int</span> deep)</span> </span>&#123;</span><br><span class="line">        StringBuilder sb=<span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;deep;i++)&#123;</span><br><span class="line">            sb.append(<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.append(<span class="keyword">this</span>.getName());</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        <span class="keyword">int</span> l = <span class="keyword">this</span>.getCompanys().size();</span><br><span class="line">        <span class="keyword">if</span> (l &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; l; i++) &#123;</span><br><span class="line">                <span class="keyword">this</span>.getCompanys().get(i).display(deep+<span class="number">2</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Vector&lt;AbstractCompany&gt; <span class="title">getCompanys</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> companys;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeCompany</span><span class="params">(AbstractCompany company)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.companys.remove(company);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addCompany</span><span class="params">(AbstractCompany company)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.companys.add(company);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.composite;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Company</span> <span class="keyword">extends</span> <span class="title">AbstractCompany</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Company</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setName(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.composite;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TechDepartment</span> <span class="keyword">extends</span> <span class="title">AbstractCompany</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TechDepartment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TechDepartment</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setName(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.composite;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UIDepartment</span> <span class="keyword">extends</span> <span class="title">AbstractCompany</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UIDepartment</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.setName(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UIDepartment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.composite;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CEO</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        AbstractCompany company = <span class="keyword">new</span> Company(<span class="string">&quot;总公司&quot;</span>);</span><br><span class="line">        AbstractCompany abc = <span class="keyword">new</span> TechDepartment(<span class="string">&quot;技术一部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        abc = <span class="keyword">new</span> TechDepartment(<span class="string">&quot;技术二部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        abc = <span class="keyword">new</span> TechDepartment(<span class="string">&quot;技术三部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        abc = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI一部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        abc = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI二部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        abc = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI三部&quot;</span>);</span><br><span class="line">        company.addCompany(abc);</span><br><span class="line">        AbstractCompany abc1 = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI一组&quot;</span>);</span><br><span class="line">        abc.addCompany(abc1);</span><br><span class="line">        abc1 = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI二组&quot;</span>);</span><br><span class="line">        abc.addCompany(abc1);</span><br><span class="line">        abc1 = <span class="keyword">new</span> UIDepartment(<span class="string">&quot;UI三组&quot;</span>);</span><br><span class="line">        abc.addCompany(abc1);</span><br><span class="line">        company.display(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>输出：</code></p>
+<pre><code>总公司
+        技术一部
+        技术二部
+        技术三部
+        UI一部
+        UI二部
+        UI三部
+                UI一组
+                UI二组
+                UI三组</code></pre>
+<p>###享元模式（Flyweight）<br>GoF这样定义:</p>
+<blockquote>
+<p>运用共享技术有效地支持大量细粒度的对象。</p>
+</blockquote>
+<p>咱们这里会想到数据库连接池，对，就是它，咱们先看一下类图。</p>
+<img  src='/images/pattern/flayweight.png' class='col-xs-12 thumbnail'/>
+`示例代码如下：`
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.flayweight;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectionPool</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Vector&lt;Connection&gt; pool;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ConnectionPool instance;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> poolSize=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> String url = <span class="string">&quot;jdbc:mysql://127.0.0.1:3306/mysql&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String username = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String password = <span class="string">&quot;root&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String driverClassName = <span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ConnectionPool</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pool=<span class="keyword">new</span> Vector&lt;Connection&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; poolSize; i++) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Class.forName(driverClassName);</span><br><span class="line">                pool.add(DriverManager.getConnection(url, username, password));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> ConnectionPool <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> instance=<span class="keyword">new</span> ConnectionPool();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Connection connection=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(pool.size()&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            connection=pool.get(<span class="number">0</span>);</span><br><span class="line">            pool.remove(connection);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> connection;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">(Connection conn)</span></span>&#123;</span><br><span class="line">        pool.add(<span class="number">0</span>,conn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> design.pattern.flayweight;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by Aaron on 15/9/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</span><br><span class="line">        ConnectionPool pool=ConnectionPool.getInstance();</span><br><span class="line">        Connection connection=pool.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">        connection=pool.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">        pool.release(connection);</span><br><span class="line">        connection=pool.getConnection();</span><br><span class="line">        System.out.println(connection);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>输出：</p>
+<pre><code>com.mysql.jdbc.JDBC4Connection@2d8e6db6
+com.mysql.jdbc.JDBC4Connection@23ab930d
+com.mysql.jdbc.JDBC4Connection@23ab930d</code></pre>
+
+
+        
+
+        
+            <div class="full-width auto-padding tags">
+                
+                    <a href="/tags/java/">java</a>
+                
+                    <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+                
+            </div>
+        
+    </section>
+</article>
+
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+    <section class="meta">
+        
+            <h2 class="title">
                 <a href="/2015/09/13/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B9%8B%E8%A1%8C%E4%B8%BA%E5%9E%8B%E6%A8%A1%E5%BC%8F/">
                     JAVA设计模式之行为型模式
                 </a>
@@ -984,368 +1186,6 @@ ls -l |awk &#39;BEGIN &#123;size=0;&#125; &#123;size=size+$5;&#125; END&#123;pri
 
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-    <section class="meta">
-        
-            <h2 class="title">
-                <a href="/2015/09/06/%E8%BF%90%E7%BB%B4%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">
-                    常用运维知识大杂烩
-                </a>
-            </h2>
-        
-        <time>
-            9月 6, 2015
-        </time>
-        
-    
-    <div class='cats'>
-        <a href="/categories/%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/">扩展知识</a>, <a href="/categories/%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/linux/">linux</a>
-    </div>
-
-    </section>
-    <section class="article typo">
-        <p>##日常系统操作</p>
-<ul>
-<li>将远程文件拷贝到本地</li>
-</ul>
-<pre><code>    scp username@ip:remote_filepath /local_dir</code></pre>
-<ul>
-<li><p>同步目录</p>
-<pre><code>  rsync -avzr 172.xx.xx.11:/opt/jagent/tomcat* .
-
-  sudo chown -R fsdevops.fsdevops sms-service/</code></pre>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://bian5399.blog.51cto.com/3848702/963662">linux 最大文件限制数 ulimit</a></p>
-<pre><code>  ulimit -n</code></pre>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/likehua/p/3831331.html">资源暂时不可用，资源已耗尽</a></p>
-<pre><code>    $ ps
-        -bash: fork: retry: 资源暂时不可用
-        -bash: fork: retry: 资源暂时不可用
-        -bash: fork: retry: 资源暂时不可用
-        -bash: fork: retry: 资源暂时不可用
-
-    IT组哥们分析说是每个用户句柄数只有1024个，目前超了
-
-    ulimit -a 即可查询linux相关的参数     </code></pre>
-</li>
-<li><p>查看进程号</p>
-</li>
-</ul>
-<pre><code>    ps aux|grep sms|awk -F  &#39; &#39; &#39;&#123;print $2&#125;&#39;
-
-    ps aux|grep sms|awk -F  &#39; &#39; &#39;&#123;kill $2&#125;&#39;</code></pre>
-<ul>
-<li>grep的使用</li>
-</ul>
-<pre><code>    cat rmq_bk_gc.log|grep -E -o &#39;\w+&#39;|sort|uniq -c|sort -k 2,1
-    -E 正则
-    -o 输出 -O 标示出 
-    sort排序
-    uniq group</code></pre>
-<ul>
-<li><p>强制用sudo保存</p>
-<pre><code>  :w !sudo tee %</code></pre>
-</li>
-<li><p>设置服务自启动</p>
-<p>  chkconfig</p>
-</li>
-<li><p>查看某端口被谁占用</p>
-<pre><code>   netstat -apn
-   netstat -apn|grep 8013
-   ps -aux | grep 33514/java</code></pre>
-</li>
-<li><p>查看文件占用<br>  du -hs .</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/ggjucheng/archive/2012/01/14/2322659.html">监视指定网络的数据包</a></p>
-<pre><code>   监视指定主机和端口的数据包      
-   tcpdump tcp port 23 and host 210.27.48.1</code></pre>
-</li>
-<li><p>防火墙</p>
-<pre><code>    hostname
-    iptables -t filter -I INPUT -p tcp --dport 27107 -m state --state NEW -j ACCEPT
-
-    sudo iptables -A INPUT -p tcp --dport 13710 -j ACCEPT
-    sudo iptables -A OUTPUT -p tcp --sport 13710 -j ACCEPT
-
-    service iptables save
-    vim /etc/puppet/puppet.conf 
-
-    service puppet restart
-    iptables -L
-    more /etc/sysconfig/iptables
-    vim /etc/sysconfig/iptables
-    service iptables reload</code></pre>
-</li>
-</ul>
-<pre><code>      停止防火墙
-
-      sudo su
-      service iptables stop</code></pre>
-<ul>
-<li><p>安装telnet</p>
-<pre><code>    yum install -y telnet</code></pre>
-</li>
-<li><p>查询某类文件</p>
-<pre><code>    grep netty -R .</code></pre>
-</li>
-</ul>
-<ul>
-<li><p>查看内存</p>
-<pre><code>    free </code></pre>
-</li>
-<li><p>curl 发送请求</p>
-<pre><code>  目的1：通过脚本发送post请求。
-  答案： curl -d &quot;leaderboard_id=7778a8143f111272&amp;score=19&amp;app_key=8d49f16fe034b98b&amp;_test_user=test01&quot; &quot;http://172.16.102.208:8089/wiapi/score&quot;
-
-  目的2：通过脚本发送post请求，顺便附带文本数据，比如通过&quot;浏览&quot;选择本地的card.txt并上传发送post请求
-  答案：  curl  -F &quot;blob=@card.txt;type=text/plain&quot;  &quot;http://172.16.102.208:8089/wiapi/score?leaderboard_id=7778a8143f111272&amp;score=40&amp;app_key=8d49f16fe034b98b&amp;_test_user=test01&quot;   </code></pre>
-</li>
-<li><p>ssh免密码登陆</p>
-</li>
-</ul>
-<pre><code>ssh-keygen -t rsa -P &#39;&#39;
-
-将生成的文件拷到目标主机，交添加到keys文件中
-
-cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
-<ul>
-<li>vmstat  相比top，我可以看到整个机器的CPU,内存,IO的使用情况，而不是单单看到各个进程的CPU使用率和内存使用率</li>
-</ul>
-<pre><code>    2表示每个两秒采集一次服务器状态，1表示只采集一次。
-    procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
-     r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
-     0  0      0 779304  67972 706748    0    0   135    45  538 1117 10  3 86  2  0
-
-     r 表示运行队列(就是说多少个进程真的分配到CPU)，我测试的服务器目前CPU比较空闲，没什么程序在跑，当这个值超过了CPU数目，就会出现CPU瓶颈了。这个也和top的负载有关系，一般负载超过了3就比较高，超过了5就高，超过了10就不正常了，服务器的状态很危险。top的负载类似每秒的运行队列。如果运行队列过大，表示你的CPU很繁忙，一般会造成CPU使用率很高。
-
-     b 表示阻塞的进程,这个不多说，进程阻塞，大家懂的。
-
-     swpd 虚拟内存已使用的大小，如果大于0，表示你的机器物理内存不足了，如果不是程序内存泄露的原因，那么你该升级内存了或者把耗内存的任务迁移到其他机器。
-
-     free   空闲的物理内存的大小，我的机器内存总共8G，剩余3415M。
-
-     buff   Linux/Unix系统是用来存储，目录里面有什么内容，权限等的缓存，我本机大概占用300多M
-
-     cache cache直接用来记忆我们打开的文件,给文件做缓冲，我本机大概占用300多M(这里是Linux/Unix的聪明之处，把空闲的物理内存的一部分拿来做文件和目录的缓存，是为了提高 程序执行的性能，当程序使用内存时，buffer/cached会很快地被使用。)
-
-     si  每秒从磁盘读入虚拟内存的大小，如果这个值大于0，表示物理内存不够用或者内存泄露了，要查找耗内存进程解决掉。我的机器内存充裕，一切正常。
-
-     so  每秒虚拟内存写入磁盘的大小，如果这个值大于0，同上。
-
-     bi  块设备每秒接收的块数量，这里的块设备是指系统上所有的磁盘和其他块设备，默认块大小是1024byte，我本机上没什么IO操作，所以一直是0，但是我曾在处理拷贝大量数据(2-3T)的机器上看过可以达到140000/s，磁盘写入速度差不多140M每秒
-
-     bo 块设备每秒发送的块数量，例如我们读取文件，bo就要大于0。bi和bo一般都要接近0，不然就是IO过于频繁，需要调整。
-
-     in 每秒CPU的中断次数，包括时间中断
-
-     cs 每秒上下文切换次数，例如我们调用系统函数，就要进行上下文切换，线程的切换，也要进程上下文切换，这个值要越小越好，太大了，要考虑调低线程或者进程的数目,例如在apache和nginx这种web服务器中，我们一般做性能测试时会进行几千并发甚至几万并发的测试，选择web服务器的进程可以由进程或者线程的峰值一直下调，压测，直到cs到一个比较小的值，这个进程和线程数就是比较合适的值了。系统调用也是，每次调用系统函数，我们的代码就会进入内核空间，导致上下文切换，这个是很耗资源，也要尽量避免频繁调用系统函数。上下文切换次数过多表示你的CPU大部分浪费在上下文切换，导致CPU干正经事的时间少了，CPU没有充分利用，是不可取的。
-
-     us 用户CPU时间，我曾经在一个做加密解密很频繁的服务器上，可以看到us接近100,r运行队列达到80(机器在做压力测试，性能表现不佳)。
-
-     sy 系统CPU时间，如果太高，表示系统调用时间长，例如是IO操作频繁。
-
-     id  空闲 CPU时间，一般来说，id + us + sy = 100,一般我认为id是空闲CPU使用率，us是用户CPU使用率，sy是系统CPU使用率。
-
-     wt 等待IO CPU时间。</code></pre>
-<ul>
-<li>jstat java虚拟机 垃圾回收状态查看</li>
-</ul>
-<pre><code>    命令格式
-    jstat命令命令格式：
-    jstat [Options] vmid [interval] [count]
-    参数说明：
-    Options，选项，我们一般使用 -gcutil 查看gc情况
-    vmid，VM的进程号，即当前运行的java进程号
-    interval，间隔时间，单位为秒或者毫秒
-    count，打印次数，如果缺省则打印无数次
-    示例说明
-    示例
-    通常运行命令如下：
-    jstat -gc 12538 5000
-    即会每5秒一次显示进程号为12538的java进成的GC情况，
-    显示内容如下图：
-
-    jstat -gc 19014 1000
-     S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU    CCSC   CCSU   YGC     YGCT    FGC    FGCT     GCT   
-    10752.0 10752.0  0.0   5293.9 65536.0  65224.5   175104.0     16.0    13056.0 12799.5 1536.0 1495.2      1    0.009   0      0.000    0.009
-    10752.0 10752.0  0.0   5293.9 65536.0  65224.5   175104.0     16.0    13056.0 12799.5 1536.0 1495.2      1    0.009   0      0.000    0.009
-
-    结果说明
-    显示内容说明如下（部分结果是通过其他其他参数显示的，暂不说明）：
-             S0C：年轻代中第一个survivor（幸存区）的容量 (字节) 
-             S1C：年轻代中第二个survivor（幸存区）的容量 (字节) 
-             S0U：年轻代中第一个survivor（幸存区）目前已使用空间 (字节) 
-             S1U：年轻代中第二个survivor（幸存区）目前已使用空间 (字节) 
-             EC：年轻代中Eden（伊甸园）的容量 (字节) 
-             EU：年轻代中Eden（伊甸园）目前已使用空间 (字节) 
-             OC：Old代的容量 (字节) 
-             OU：Old代目前已使用空间 (字节) 
-             PC：Perm(持久代)的容量 (字节) 
-             PU：Perm(持久代)目前已使用空间 (字节) 
-             YGC：从应用程序启动到采样时年轻代中gc次数 
-             YGCT：从应用程序启动到采样时年轻代中gc所用时间(s) 
-             FGC：从应用程序启动到采样时old代(全gc)gc次数 
-             FGCT：从应用程序启动到采样时old代(全gc)gc所用时间(s) 
-             GCT：从应用程序启动到采样时gc用的总时间(s) 
-             NGCMN：年轻代(young)中初始化(最小)的大小 (字节) 
-             NGCMX：年轻代(young)的最大容量 (字节) 
-             NGC：年轻代(young)中当前的容量 (字节) 
-             OGCMN：old代中初始化(最小)的大小 (字节) 
-             OGCMX：old代的最大容量 (字节) 
-             OGC：old代当前新生成的容量 (字节) 
-             PGCMN：perm代中初始化(最小)的大小 (字节) 
-             PGCMX：perm代的最大容量 (字节)   
-             PGC：perm代当前新生成的容量 (字节) 
-             S0：年轻代中第一个survivor（幸存区）已使用的占当前容量百分比 
-             S1：年轻代中第二个survivor（幸存区）已使用的占当前容量百分比 
-             E：年轻代中Eden（伊甸园）已使用的占当前容量百分比 
-             O：old代已使用的占当前容量百分比 
-             P：perm代已使用的占当前容量百分比 
-             S0CMX：年轻代中第一个survivor（幸存区）的最大容量 (字节) 
-             S1CMX ：年轻代中第二个survivor（幸存区）的最大容量 (字节) 
-             ECMX：年轻代中Eden（伊甸园）的最大容量 (字节) 
-             DSS：当前需要survivor（幸存区）的容量 (字节)（Eden区已满） 
-             TT： 持有次数限制 
-             MTT ： 最大持有次数限制 </code></pre>
-<ul>
-<li><p>jstack pid java查看java程序的状态</p>
-</li>
-<li><p>grep <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Regular_expression">正则</a>输出 </p>
-</li>
-</ul>
-<pre><code>    grep -o -E &quot;[0-9]&#123;11&#125;&quot; xx.log
-
-    cat error.log |grep &#39;Failed to invoke the method&#39;|grep &#39;2015-12-08 20&#39;|awk -F&#39;Failed to invoke the method&#39; &#39;&#123;print $2&#125;&#39;|awk &#39;&#123;print $1&#125;&#39;  |sort|uniq -c</code></pre>
-<ul>
-<li><p>删除某些文件</p>
-<pre><code>  find ./ -name &#39;xx.log&#39; |xargs rm -rf</code></pre>
-</li>
-<li><p>删除某个文件外的其它文件</p>
-<pre><code>  ls | grep -v keep | xargs rm #删除keep文件之外的所有文件
-  说明： ls先得到当前的所有文件和文件夹的名字， grep -v keep，进行grep正则匹配查找keep，-v参数决定了结果为匹配之外的结果，也就是的到了keep之外的所有文件名，然后 xargs用于从 标准输入获得参数 并且传递给后面的命令，这里使用的命令是 rm，然后由rm删除前面选择的文件</code></pre>
-</li>
-<li><p>查看磁盘信息</p>
-</li>
-</ul>
-<pre><code>    查看当前文件夹下所有文件大小（包括子文件夹）
-       ➜  ~  du -sh
-        47G    .
-    查看指定文件夹大小
-       # du -hs ftp
-       6.3G    ftp
-
-    查看磁盘空间大小命令
-    df -h Df命令是linux系统以磁盘分区为单位查看文件系统，可以加上参数查看磁盘剩余空间信息，命令格式： df -hl 显示格式为： 文件系统 容量 已用 可用 已用% 挂载点 Filesystem Size Used Avail Use% Mounted on /dev/hda2 45G 19G 24G 44% / /dev/hda1 494
-
-    df   -h
-
-    Df命令是linux系统以磁盘分区为单位查看文件系统，可以加上参数查看磁盘剩余空间信息，命令格式：
-
-    df -hl
-
-    显示格式为：　
-
-    文件系统              容量 已用 可用 已用% 挂载点　
-
-    Filesystem            Size Used Avail Use% Mounted on
-
-    /dev/hda2              45G   19G   24G 44% /</code></pre>
-<ul>
-<li><p>gz解压</p>
-<pre><code>  gzip -x ...     </code></pre>
-</li>
-<li><p>proc 启动应用程序时，找不到log去哪了</p>
-<pre><code>  ls -l /proc/63220/fd|grep log</code></pre>
-</li>
-</ul>
-<ul>
-<li>查看内存信息 </li>
-</ul>
-<p>#linux 下安装软件</p>
-<ul>
-<li>yum</li>
-</ul>
-<pre><code>    指定源进行安装
-    yum install 软件名 --enablerepo=安装包地址</code></pre>
-<ul>
-<li>重新安装JDK</li>
-</ul>
-<pre><code>    删除JDK:
-        rpm -qa | grep jdk|xargs sudo rpm -e --nodeps
-    download jdk
-     wget -c -P ./ http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.rpm?AuthParam=1448637274_af870ccf6c2c78750a5977e6da301744
-
-     安装
-
-     以JDK1.8为例
-
-     拷贝到/usr/share下，mv jdk-8u65-linux-x64.rpm /usr/share
-
-     用rpm -ivh命令安装
-
-
-
-     配置环境变量
-
-     在/etc/profile下增加
-
-     # set Java environment
-     JAVA_HOME=/usr/share/jdk-8u65-linux-x64
-     PATH=$JAVA_HOME/bin:$PATH
-     CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
-     export JAVA_HOME
-     export PATH
-     export CLASSPATH
-
-
-
-     测试
-
-     [root@localhost ~]# echo $JAVA_HOME
-     /usr/share/jdk1.6.0_43
-     [root@localhost ~]# echo $PATH
-     /usr/share/jdk1.6.0_43/bin:/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
-     [root@localhost ~]# echo $CLASSPATH
-     .:/usr/share/jdk1.6.0_43/lib/dt.jar:/usr/share/jdk1.6.0_43/lib/tools.jar
-
-     [root@localhost ~]# java -version
-     java version &quot;1.6.0_43&quot;
-     Java(TM) SE Runtime Environment (build 1.6.0_43-b01)
-     Java HotSpot(TM) 64-Bit Server VM (build 20.14-b01, mixed mode)
-
-    Managing Java
-
-    sudo update-alternatives --config java
-    有 2 个候选项可用于替换 java (提供 /usr/bin/java)。</code></pre>
-<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><ul>
-<li><p>mysql授权</p>
-<pre><code>  ALL PRIVILEGES ON *.* TO &#39;root&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;root&#39; WITH GRANT OPTION;</code></pre>
-</li>
-</ul>
-<h2 id="安装apt-get"><a href="#安装apt-get" class="headerlink" title="安装apt-get"></a>安装apt-get</h2><p><a target="_blank" rel="noopener" href="http://everyday-tech.com/apt-get-on-centos/">http://everyday-tech.com/apt-get-on-centos/</a></p>
-<h2 id="lsof"><a href="#lsof" class="headerlink" title="lsof"></a>lsof</h2><p>lsof语法格式是：<br>lsof ［options］ filename<br>复制代码</p>
-<p>lsof abc.txt 显示开启文件abc.txt的进程<br>lsof -c abc 显示abc进程现在打开的文件<br>lsof -c -p 1234 列出进程号为1234的进程所打开的文件<br>lsof -g gid 显示归属gid的进程情况<br>lsof +d /usr/local/ 显示目录下被进程开启的文件<br>lsof +D /usr/local/ 同上，但是会搜索目录下的目录，时间较长<br>lsof -d 4 显示使用fd为4的进程<br>lsof -i 用以显示符合条件的进程情况<br>lsof -i[46] [protocol][@hostname|hostaddr][:service|port]<br>  46 –&gt; IPv4 or IPv6<br>  protocol –&gt; TCP or UDP<br>  hostname –&gt; Internet host name<br>  hostaddr –&gt; IPv4地址<br>  service –&gt; /etc/service中的 service name (可以不止一个)<br>  port –&gt; 端口号 (可以不止一个)</p>
-<h2 id="traceroute-IP"><a href="#traceroute-IP" class="headerlink" title="traceroute IP"></a>traceroute IP</h2><h2 id="监控某台机器到某IP的链路的连通性"><a href="#监控某台机器到某IP的链路的连通性" class="headerlink" title="监控某台机器到某IP的链路的连通性"></a>监控某台机器到某IP的链路的连通性</h2><pre><code>    nohup ping -W 1 172.31.xx.xx &amp;&gt;/tmp/ping.log &amp;
-    crontab -e
-    * * * * *       echo &quot;`date +%d-%H:%M`&quot; &gt;&gt; /tmp/ping.log</code></pre>
-
-
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/linux%E5%91%BD%E4%BB%A4/">linux命令</a>
-                
-            </div>
-        
-    </section>
-</article>
-
-    </div>
-  
 </section>
 
 
@@ -1423,6 +1263,8 @@ cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
     
         <li><a class="flat-box" href="/categories/%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/"><div class='name'>读书学习</div><div class='badget'>5</div></a></li>
     
+        <li><a class="flat-box" href="/categories/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/"><div class='name'>读书学习</div><div class='badget'>1</div></a></li>
+    
         <li><a class="flat-box" href="/categories/%E6%8A%80%E6%9C%AF/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"><div class='name'>问题总结</div><div class='badget'>1</div></a></li>
     
     </ul>
@@ -1435,7 +1277,7 @@ cat sshnopw.pub &gt;&gt; /root/.ssh/authorized_keys</code></pre>
 <div class="m_widget tagcloud">
     <div class="header">标签云</div>
     <div class='content'>
-        <a href="/tags/CAP/" style="font-size: 15.2px; color: #666">CAP</a> <a href="/tags/GIS/" style="font-size: 14px; color: #808080">GIS</a> <a href="/tags/Protobuf/" style="font-size: 14px; color: #808080">Protobuf</a> <a href="/tags/alfred/" style="font-size: 14px; color: #808080">alfred</a> <a href="/tags/angularjs/" style="font-size: 16.4px; color: #4d4d4d">angularjs</a> <a href="/tags/ansible/" style="font-size: 14px; color: #808080">ansible</a> <a href="/tags/arm/" style="font-size: 14px; color: #808080">arm</a> <a href="/tags/book/" style="font-size: 15.2px; color: #666">book</a> <a href="/tags/bug/" style="font-size: 14px; color: #808080">bug</a> <a href="/tags/django/" style="font-size: 14px; color: #808080">django</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #808080">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 14px; color: #808080">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 14px; color: #808080">fastfs</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/ionic/" style="font-size: 16.4px; color: #4d4d4d">ionic</a> <a href="/tags/java/" style="font-size: 20px; color: #000">java</a> <a href="/tags/jdk/" style="font-size: 14px; color: #808080">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 15.2px; color: #666">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 14px; color: #808080">jmeter</a> <a href="/tags/linux/" style="font-size: 14px; color: #808080">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 14px; color: #808080">linux命令</a> <a href="/tags/mac/" style="font-size: 15.2px; color: #666">mac</a> <a href="/tags/maven/" style="font-size: 14px; color: #808080">maven</a> <a href="/tags/mp3/" style="font-size: 14px; color: #808080">mp3</a> <a href="/tags/mysql/" style="font-size: 14px; color: #808080">mysql</a> <a href="/tags/nginx/" style="font-size: 14px; color: #808080">nginx</a> <a href="/tags/nocomment/" style="font-size: 14px; color: #808080">nocomment</a> <a href="/tags/poi/" style="font-size: 14px; color: #808080">poi</a> <a href="/tags/python/" style="font-size: 16.4px; color: #4d4d4d">python</a> <a href="/tags/redis/" style="font-size: 15.2px; color: #666">redis</a> <a href="/tags/rpc/" style="font-size: 14px; color: #808080">rpc</a> <a href="/tags/rsa/" style="font-size: 14px; color: #808080">rsa</a> <a href="/tags/schedule/" style="font-size: 14px; color: #808080">schedule</a> <a href="/tags/workflow/" style="font-size: 14px; color: #808080">workflow</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #808080">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #808080">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 15.2px; color: #666">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 14px; color: #808080">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #808080">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 14px; color: #808080">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 14px; color: #808080">健康</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 17.6px; color: #333">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 14px; color: #808080">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 15.2px; color: #666">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 16.4px; color: #4d4d4d">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 14px; color: #808080">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 14px; color: #808080">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14px; color: #808080">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #808080">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 14px; color: #808080">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15.2px; color: #666">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #808080">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 15.2px; color: #666">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 14px; color: #808080">查找</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 14px; color: #808080">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 15.2px; color: #666">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.8px; color: #1a1a1a">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 14px; color: #808080">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 14px; color: #808080">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 15.2px; color: #666">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 16.4px; color: #4d4d4d">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 14px; color: #808080">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 14px; color: #808080">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 15.2px; color: #666">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 14px; color: #808080">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 14px; color: #808080">音频转换</a>
+        <a href="/tags/CAP/" style="font-size: 15px; color: #6b6b6b">CAP</a> <a href="/tags/GIS/" style="font-size: 14px; color: #808080">GIS</a> <a href="/tags/Protobuf/" style="font-size: 14px; color: #808080">Protobuf</a> <a href="/tags/alfred/" style="font-size: 14px; color: #808080">alfred</a> <a href="/tags/angularjs/" style="font-size: 17px; color: #404040">angularjs</a> <a href="/tags/ansible/" style="font-size: 14px; color: #808080">ansible</a> <a href="/tags/arm/" style="font-size: 14px; color: #808080">arm</a> <a href="/tags/book/" style="font-size: 15px; color: #6b6b6b">book</a> <a href="/tags/bug/" style="font-size: 14px; color: #808080">bug</a> <a href="/tags/django/" style="font-size: 14px; color: #808080">django</a> <a href="/tags/dubbo/" style="font-size: 14px; color: #808080">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 14px; color: #808080">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 14px; color: #808080">fastfs</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/ionic/" style="font-size: 17px; color: #404040">ionic</a> <a href="/tags/java/" style="font-size: 20px; color: #000">java</a> <a href="/tags/jdk/" style="font-size: 14px; color: #808080">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 15px; color: #6b6b6b">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 14px; color: #808080">jmeter</a> <a href="/tags/linux/" style="font-size: 14px; color: #808080">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 14px; color: #808080">linux命令</a> <a href="/tags/mac/" style="font-size: 15px; color: #6b6b6b">mac</a> <a href="/tags/maven/" style="font-size: 14px; color: #808080">maven</a> <a href="/tags/mp3/" style="font-size: 14px; color: #808080">mp3</a> <a href="/tags/mysql/" style="font-size: 14px; color: #808080">mysql</a> <a href="/tags/nginx/" style="font-size: 14px; color: #808080">nginx</a> <a href="/tags/nocomment/" style="font-size: 14px; color: #808080">nocomment</a> <a href="/tags/poi/" style="font-size: 14px; color: #808080">poi</a> <a href="/tags/python/" style="font-size: 17px; color: #404040">python</a> <a href="/tags/redis/" style="font-size: 15px; color: #6b6b6b">redis</a> <a href="/tags/rpc/" style="font-size: 14px; color: #808080">rpc</a> <a href="/tags/rsa/" style="font-size: 14px; color: #808080">rsa</a> <a href="/tags/schedule/" style="font-size: 14px; color: #808080">schedule</a> <a href="/tags/workflow/" style="font-size: 14px; color: #808080">workflow</a> <a href="/tags/zookeeper/" style="font-size: 14px; color: #808080">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #808080">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 16px; color: #555">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 14px; color: #808080">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 14px; color: #808080">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 14px; color: #808080">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 14px; color: #808080">健康</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 18px; color: #2b2b2b">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 14px; color: #808080">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 15px; color: #6b6b6b">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 17px; color: #404040">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 14px; color: #808080">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 14px; color: #808080">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14px; color: #808080">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 14px; color: #808080">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 14px; color: #808080">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 15px; color: #6b6b6b">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #808080">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 15px; color: #6b6b6b">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 14px; color: #808080">查找</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 14px; color: #808080">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 14px; color: #808080">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 15px; color: #6b6b6b">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 19px; color: #151515">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 14px; color: #808080">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 14px; color: #808080">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 15px; color: #6b6b6b">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 17px; color: #404040">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 14px; color: #808080">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 14px; color: #808080">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 15px; color: #6b6b6b">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 14px; color: #808080">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 14px; color: #808080">音频转换</a>
     </div>
 </div>
 

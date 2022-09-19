@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: 人生 | Share</title>
+  <title>Category: 读书学习 | Share</title>
   <meta name="description" content="生活点滴和知识分享" />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -15,7 +15,7 @@
   <meta name="description" content="生活点滴和知识分享">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Share">
-<meta property="og:url" content="http://example.com/tags/%E4%BA%BA%E7%94%9F/index.html">
+<meta property="og:url" content="http://example.com/categories/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Share">
 <meta property="og:description" content="生活点滴和知识分享">
 <meta property="og:locale" content="zh_CN">
@@ -126,7 +126,7 @@
       <div class='l_main'>
         
   <script>
-    window.subData= { title:'Tag : 人生'}
+    window.subData= { title:'Category : 读书学习'}
   </script>
 
 <section class="post-list">
@@ -169,136 +169,6 @@
             <div class="full-width auto-padding tags">
                 
                     <a href="/tags/%E4%BA%BA%E7%94%9F/">人生</a>
-                
-            </div>
-        
-    </section>
-</article>
-
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-    <section class="meta">
-        
-            <h2 class="title">
-                <a href="/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/">
-                    开启我的blog-新设备
-                </a>
-            </h2>
-        
-        <time>
-            9月 4, 2022
-        </time>
-        
-    
-    <div class='cats'>
-        <a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-    </div>
-
-    </section>
-    <section class="article typo">
-        <h3 id="一-下载博客git到本地"><a href="#一-下载博客git到本地" class="headerlink" title="一. 下载博客git到本地"></a>一. 下载博客git到本地</h3><h3 id="二-安装-hexo"><a href="#二-安装-hexo" class="headerlink" title="二. 安装 hexo"></a>二. 安装 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo</a></h3><h3 id="三-当前项目目录中安装主题及node依赖包"><a href="#三-当前项目目录中安装主题及node依赖包" class="headerlink" title="三. 当前项目目录中安装主题及node依赖包"></a>三. 当前项目目录中安装主题及node依赖包</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">node install</span><br><span class="line">git clone --depth 1 https://github.com/hexojs/hexo-theme-landscape themes/landscape</span><br></pre></td></tr></table></figure>
-
-<h3 id="四-测试使用"><a href="#四-测试使用" class="headerlink" title="四. 测试使用"></a>四. 测试使用</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo server </span><br></pre></td></tr></table></figure>
-<h3 id="五-遇到的问题"><a href="#五-遇到的问题" class="headerlink" title="五. 遇到的问题"></a>五. 遇到的问题</h3><ul>
-<li>无法deploy </li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git@github.com: Permission denied (publickey).</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL &#123;</span><br><span class="line">       err: Error: Spawn failed</span><br><span class="line">       at ChildProcess.&lt;anonymous&gt; (/Users/Aaron/Documents/code/github/wansongblog/node_modules/hexo-deployer-git/node_modules/hexo-util/lib/spawn.js:51:21)</span><br><span class="line">       at ChildProcess.emit (node:events:390:28)</span><br><span class="line">       at Process.ChildProcess._handle.onexit (node:internal/child_process:290:12) &#123;</span><br><span class="line">       code: 128</span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br><span class="line">Something&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>无法修改， 新建的文档是被锁定的</li>
-</ul>
-<p><img src="/2022/09/04/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog-%E6%96%B0%E8%AE%BE%E5%A4%87/new_doc_error.png" alt="img.png"></p>
-<blockquote>
-<p>解决办法: 修改hexo权限即可</p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">➜  wansongblog git:(master) ✗ which hexo</span><br><span class="line">/usr/local/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ ll /usr/local/bin/hexo</span><br><span class="line">lrwxr-xr-x  1 root  wheel  37 Sep  4 05:24 /usr/local/bin/hexo -&gt; ../lib/node_modules/hexo-cli/bin/hexo</span><br><span class="line">➜  wansongblog git:(master) ✗ cd  /usr/local/bin/</span><br><span class="line">➜  bin cd ../lib/node_modules</span><br><span class="line">➜  node_modules sudo chmod -R 777 hexo-cli</span><br></pre></td></tr></table></figure>
-
-<h3 id="六-自动化部署"><a href="#六-自动化部署" class="headerlink" title="六. 自动化部署"></a>六. 自动化部署</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Helium-Air/p/15646484.html">参考</a></p>
-
-
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/%E4%BA%BA%E7%94%9F/">人生</a>
-                
-                    <a href="/tags/%E6%84%9F%E6%82%9F/">感悟</a>
-                
-                    <a href="/tags/%E7%96%91%E6%83%91/">疑惑</a>
-                
-            </div>
-        
-    </section>
-</article>
-
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-    <section class="meta">
-        
-            <h2 class="title">
-                <a href="/2015/08/20/%E5%BC%80%E5%90%AF%E6%88%91%E7%9A%84blog/">
-                    我的第一篇博客
-                </a>
-            </h2>
-        
-        <time>
-            8月 20, 2015
-        </time>
-        
-    
-    <div class='cats'>
-        <a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-    </div>
-
-    </section>
-    <section class="article typo">
-        <p>###为什么写博客</p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/beiyuu/Github-Pages-Example/blob/master/_posts/blog/2011-12-18-why-blog.md">世界这么乱，装纯给谁看</a></li>
-<li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/bangerlee/archive/2011/09/11/2173632.html">我为什么写博客</a></li>
-<li>我认同他们所分享的，所以我也开始了自己的博客之路</li>
-</ol>
-<h3 id="为什么现在才开始"><a href="#为什么现在才开始" class="headerlink" title="为什么现在才开始"></a>为什么现在才开始</h3><ol>
-<li>从2014年就一直想写自己的博客，一直没有沉下心来去写。</li>
-<li>这几天搭档出去休息，我也偷偷的休息一下，将自己的博客这一课给补上。</li>
-</ol>
-<h3 id="写哪些东西"><a href="#写哪些东西" class="headerlink" title="写哪些东西"></a>写哪些东西</h3><ol>
-<li>读书笔记：记录在看书时一些笔记，方便自己日后参考</li>
-<li>项目中遇到难点笔记：项目中遇到问题的解决过程，方便将来参考</li>
-<li>技术分享会总结：记录在技术学习上的点滴</li>
-<li>个人随笔 ：本人一些业余随笔</li>
-<li>关于：本人的简单介绍</li>
-</ol>
-<h3 id="为什么会选择用github-pages呢"><a href="#为什么会选择用github-pages呢" class="headerlink" title="为什么会选择用github pages呢"></a>为什么会选择用github pages呢</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/beiyuu/Github-Pages-Example/blob/master/_posts/blog/2011-12-18-why-blog.md">Github-Pages-Example</a></li>
-<li><a target="_blank" rel="noopener" href="http://jekyll.bootcss.com/">将纯文本转化为静态网站和博客</a></li>
-<li><a target="_blank" rel="noopener" href="http://lea.verou.me/2011/10/easily-keep-gh-pages-in-sync-with-master/">keep gh-pages in sync with master</a></li>
-<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo</a></li>
-</ol>
-<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><ol>
-<li><p>添加网站优化搜索</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加flow</p>
- <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/bubkoo/</span>hexo-filter-flowchart</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-
-        
-
-        
-            <div class="full-width auto-padding tags">
-                
-                    <a href="/tags/%E4%BA%BA%E7%94%9F/">人生</a>
-                
-                    <a href="/tags/%E6%84%9F%E6%82%9F/">感悟</a>
-                
-                    <a href="/tags/%E7%96%91%E6%83%91/">疑惑</a>
                 
             </div>
         
