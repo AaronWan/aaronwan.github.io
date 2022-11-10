@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Share</title>
+  <title>万松 - 静</title>
   
   
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-11-10T14:18:34.849Z</updated>
+  <updated>2022-11-10T15:12:18.147Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,40 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>BPMN2.0</title>
+    <link href="http://example.com/2022/11/10/BPMN2.0/"/>
+    <id>http://example.com/2022/11/10/BPMN2.0/</id>
+    <published>2022-11-10T14:42:50.000Z</published>
+    <updated>2022-11-10T15:12:18.147Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Version 2.0</span><br><span class="line">OMG Document Number: formal/2011-01-03</span><br><span class="line">Standard document URL: http://www.omg.org/spec/BPMN/2.0</span><br></pre></td></tr></table></figure><p>一. 元素</p><table><thead><tr><th>分类</th><th>元素</th><th>说明</th></tr></thead><tbody><tr><td>事件 event</td><td>开始事件 startEvent<br /> 结束事件 endEvent</td><td></td></tr><tr><td>任务 task</td><td></td><td></td></tr><tr><td>子流程 sub-processes</td><td></td><td></td></tr><tr><td>CallActivity</td><td></td><td></td></tr><tr><td>网关 Gateway</td><td></td><td></td></tr><tr><td>泳道 Lane</td><td></td><td></td></tr><tr><td>数据 Data Object</td><td></td><td></td></tr><tr><td>消息,组,备注 Message,Group,Text Annotation</td><td></td><td></td></tr><tr><td>线 Sequence Flow</td><td></td><td></td></tr><tr><td>消息 Message Flow</td><td></td><td></td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Version 2.0&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;OMG Document Nu</summary>
+      
+    
+    
+    
+    <category term="BPMN" scheme="http://example.com/categories/BPMN/"/>
+    
+    <category term="元素" scheme="http://example.com/categories/BPMN/%E5%85%83%E7%B4%A0/"/>
+    
+    
+    <category term="BPMN" scheme="http://example.com/tags/BPMN/"/>
+    
+    <category term="Flow" scheme="http://example.com/tags/Flow/"/>
+    
+    <category term="流程" scheme="http://example.com/tags/%E6%B5%81%E7%A8%8B/"/>
+    
+    <category term="流程引擎" scheme="http://example.com/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/"/>
+    
+    <category term="元素" scheme="http://example.com/tags/%E5%85%83%E7%B4%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>流程好文章</title>
@@ -533,35 +567,6 @@
     <category term="图片处理" scheme="http://example.com/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/"/>
     
     <category term="人脸识别" scheme="http://example.com/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>第N次百望山到植物园</title>
-    <link href="http://example.com/2016/09/12/%E7%AC%ACN%E6%AC%A1%E7%99%BE%E6%9C%9B%E5%B1%B1%E5%88%B0%E6%A4%8D%E7%89%A9%E5%9B%AD/"/>
-    <id>http://example.com/2016/09/12/%E7%AC%ACN%E6%AC%A1%E7%99%BE%E6%9C%9B%E5%B1%B1%E5%88%B0%E6%A4%8D%E7%89%A9%E5%9B%AD/</id>
-    <published>2016-09-12T11:23:10.000Z</published>
-    <updated>2022-09-03T21:57:32.963Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="为什么是N次"><a href="#为什么是N次" class="headerlink" title="为什么是N次"></a>为什么是N次</h2><p>2015年已经多次走这样同一个路线</p><h2 id="为什么第N次记录了一下"><a href="#为什么第N次记录了一下" class="headerlink" title="为什么第N次记录了一下"></a>为什么第N次记录了一下</h2><p>之前来走的时候都是正常13公里，到植物园进行小息游园后坐公交回家。但是这次遇到了一些事情，也许今后不会再次走这条路，故在此进行记录</p><h2 id="百望山路段"><a href="#百望山路段" class="headerlink" title="百望山路段"></a>百望山路段</h2><p>不得不说百望山发展之迅速，从去年到今天常走的路基本上都已经修成了马路，真的是‘大功’ 一件，这样子人们就不用走泥路了，也不用那么接地气了  <del>~</del></p><h2 id="百望山到黑山头路段"><a href="#百望山到黑山头路段" class="headerlink" title="百望山到黑山头路段"></a>百望山到黑山头路段</h2><p>这段路不算长，也就二三公里的样子，不过曾经一个人走过N次。清醒的记得去年走的一幕幕，黑黑的，阴阴的，凉凉的，热热的，鸟儿到处都是，有时甚至还有蛐蛐在歌唱。真可以说精神上的放松。期间老婆也走过一两次，由于全程走下来比较累，基本上都是我一个人在走。<br>基本上每次走完，一周都感到比较轻松。</p><h2 id="黑山头到冷泉村防火道"><a href="#黑山头到冷泉村防火道" class="headerlink" title="黑山头到冷泉村防火道"></a>黑山头到冷泉村防火道</h2><p>这路其实都一两个比较大的景点，也许只有我自己认为那算做景点吧！</p><h3 id="山泉"><a href="#山泉" class="headerlink" title="山泉"></a>山泉</h3><p>若想去山泉取水，每次要多走2公里。一般情况下会想去但是由于后面路程的问题会选择赶路。这次我去了，其实也是被迫了基本上。嘿嘿</p><h3 id="天泉寺"><a href="#天泉寺" class="headerlink" title="天泉寺"></a>天泉寺</h3><p>今天才知道这个寺届是 <code>天泉寺</code> 之前走到这里总感觉是一片废墟，从没想过这地如此的大。这次到这里，发现有人在整修，并且已经把原来的地基轮廓都已经整理出来。<br>在这里呆了差不多一个小时，感叹时间的厉害，也感叹我们在时间长流中是那么微不足道。<br>后来又来到寺庙傍边的佛塔傍边，从佛塔的视角可以看清楚整个寺庙的全景。于是我便非常想知道，这个寺庙到底经历了哪些历史…</p><p><img src="/images/tianquansi/IMG_1938.jpg"><br><img src="/images/tianquansi/IMG_1939.jpg"><br><img src="/images/tianquansi/IMG_1940.jpg"><br><img src="/images/tianquansi/IMG_1941.jpg"><br><img src="/images/tianquansi/IMG_1942.jpg"><br><img src="/images/tianquansi/IMG_1943.jpg"><br><img src="/images/tianquansi/IMG_1944.jpg"><br><img src="/images/tianquansi/IMG_1947.jpg"><br><img src="/images/tianquansi/IMG_1948.jpg"><br><img src="/images/tianquansi/IMG_1949.jpg"><br><img src="/images/tianquansi/IMG_1950.jpg"><br><img src="/images/tianquansi/IMG_1951.jpg"><br><img src="/images/tianquansi/IMG_1958.jpg"><br><img src="/images/tianquansi/IMG_1959.jpg"><br><img src="/images/tianquansi/IMG_1963.jpg"></p><h2 id="冷泉村到植物园"><a href="#冷泉村到植物园" class="headerlink" title="冷泉村到植物园"></a>冷泉村到植物园</h2><p>这次走了一半，在去植物园的路已经被我们解放军战士把守，说是军事重地，人民不能进入。我问了一下，他们说可以从别的地方翻跃过去。同时我也看到有一帮人从这些士兵可见的范围内进行翻跃围墙。有一种说不出来的心情充上心头，但感觉在我们体制下好多类似的事情发生，从而又感叹了一些国家怎么样才能提高全民素质等等事情～～～～</p><p>我可不想去翻墙，我还是回寺庙再去看看，同时去喝些泉水，也好久没有去泉眼了。<br>今天泉水非常多，有一位好心的兄弟给帮我搞了一水袋。我便带着回家了。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>不知道下次什么时候才能再进行穿越，希望放开这块路线供大家穿越。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;为什么是N次&quot;&gt;&lt;a href=&quot;#为什么是N次&quot; class=&quot;headerlink&quot; title=&quot;为什么是N次&quot;&gt;&lt;/a&gt;为什么是N次&lt;/h2&gt;&lt;p&gt;2015年已经多次走这样同一个路线&lt;/p&gt;
-&lt;h2 id=&quot;为什么第N次记录了一下&quot;&gt;&lt;a href=&quot;#为</summary>
-      
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="人生感悟" scheme="http://example.com/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/"/>
-    
-    <category term="运动" scheme="http://example.com/tags/%E8%BF%90%E5%8A%A8/"/>
-    
-    <category term="爬山" scheme="http://example.com/tags/%E7%88%AC%E5%B1%B1/"/>
     
   </entry>
   

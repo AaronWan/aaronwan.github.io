@@ -4,6 +4,41 @@
   
     
     <entry>
+      <title>BPMN2.0</title>
+      <link href="2022/11/10/BPMN2.0/"/>
+      <url>2022/11/10/BPMN2.0/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Version 2.0</span><br><span class="line">OMG Document Number: formal/2011-01-03</span><br><span class="line">Standard document URL: http://www.omg.org/spec/BPMN/2.0</span><br></pre></td></tr></table></figure><p>一. 元素</p><table><thead><tr><th>分类</th><th>元素</th><th>说明</th></tr></thead><tbody><tr><td>事件 event</td><td>开始事件 startEvent<br /> 结束事件 endEvent</td><td></td></tr><tr><td>任务 task</td><td></td><td></td></tr><tr><td>子流程 sub-processes</td><td></td><td></td></tr><tr><td>CallActivity</td><td></td><td></td></tr><tr><td>网关 Gateway</td><td></td><td></td></tr><tr><td>泳道 Lane</td><td></td><td></td></tr><tr><td>数据 Data Object</td><td></td><td></td></tr><tr><td>消息,组,备注 Message,Group,Text Annotation</td><td></td><td></td></tr><tr><td>线 Sequence Flow</td><td></td><td></td></tr><tr><td>消息 Message Flow</td><td></td><td></td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> BPMN </category>
+          
+          <category> 元素 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> BPMN </tag>
+            
+            <tag> Flow </tag>
+            
+            <tag> 流程 </tag>
+            
+            <tag> 流程引擎 </tag>
+            
+            <tag> 元素 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>流程好文章</title>
       <link href="2022/11/03/BPMN%E5%92%8CDMN%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/"/>
       <url>2022/11/03/BPMN%E5%92%8CDMN%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/</url>
