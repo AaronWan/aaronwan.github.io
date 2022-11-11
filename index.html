@@ -73,6 +73,73 @@
       <div class="outer">
         <section id="main">
   
+    <article id="detail-网关Gateway" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/" class="article-date">
+  <time class="dt-published" datetime="2022-11-11T13:48:34.000Z" itemprop="datePublished">2022-11-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/BPMN/">BPMN</a>►<a class="article-category-link" href="/categories/BPMN/%E5%85%83%E7%B4%A0/">元素</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/">网关Gateway-排它网关(Exclusive Gateway)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">网关可以是流程的开端，也可以没有连出的线；</span><br><span class="line">网关可以有多个连入的线或多个连出的线<span class="comment">(即，它可以合并或分流)</span>。</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/images/%E9%BB%98%E8%AE%A4%E7%BD%91%E5%85%B3.png" alt="默认网关"></p>
+<h1 id="排它网关"><a href="#排它网关" class="headerlink" title="排它网关"></a>排它网关</h1><blockquote>
+<p>Exclusive Gateway</p>
+</blockquote>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>连出的线称作分支</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ol>
+<li>条件</li>
+<li>是否为默认分支</li>
+<li>分支的顺序</li>
+</ol>
+<h3 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h3><ol>
+<li>选择第一个满足条件的分支</li>
+<li>如果没有匹配的分支，选择默认分支</li>
+</ol>
+<h3 id="表示"><a href="#表示" class="headerlink" title="表示"></a>表示</h3><p><img src="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/images/%E6%8E%92%E5%AE%83%E7%BD%91%E5%85%B3.png" alt="排它网关示意图"></p>
+<h3 id="排它网关类图"><a href="#排它网关类图" class="headerlink" title="排它网关类图"></a>排它网关类图</h3><p><img src="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/images/%E6%8E%92%E5%AE%83%E7%BD%91%E5%85%B3%E7%B1%BB%E5%9B%BE.png" alt="排它网关类图"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/11/%E7%BD%91%E5%85%B3Gateway/" data-id="claclu3p30000fl542vvv7me4" data-title="网关Gateway-排它网关(Exclusive Gateway)" class="article-share-link">分享</a>
+      
+      
+        <a href="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BPMN/" rel="tag">BPMN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flow/" rel="tag">Flow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%83%E7%B4%A0/" rel="tag">元素</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" rel="tag">流程引擎</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-BPMN2.0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/10/BPMN2.0/" class="article-date">
@@ -101,64 +168,42 @@
       
         <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Version 2.0</span><br><span class="line">OMG Document Number: formal/2011-01-03</span><br><span class="line">Standard document URL: http://www.omg.org/spec/BPMN/2.0</span><br></pre></td></tr></table></figure>
 
-<p>一. 元素</p>
+<p>一. 元素分类</p>
 <table>
 <thead>
 <tr>
 <th>分类</th>
-<th>元素</th>
-<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
 <td>事件 event</td>
-<td>开始事件 startEvent<br /> 结束事件 endEvent</td>
-<td></td>
 </tr>
 <tr>
 <td>任务 task</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>子流程 sub-processes</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>CallActivity</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>网关 Gateway</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>泳道 Lane</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>数据 Data Object</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>消息,组,备注 Message,Group,Text Annotation</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>线 Sequence Flow</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>消息 Message Flow</td>
-<td></td>
-<td></td>
 </tr>
 </tbody></table>
 
@@ -825,64 +870,6 @@
 
 
   
-    <article id="post-alfred快速打开idea项目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/20/alfred%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80idea%E9%A1%B9%E7%9B%AE/" class="article-date">
-  <time class="dt-published" datetime="2020-09-20T14:19:49.000Z" itemprop="datePublished">2020-09-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%97%A5%E5%B8%B8%E5%B7%A5%E5%85%B7/">日常工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2020/09/20/alfred%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80idea%E9%A1%B9%E7%9B%AE/">Alfred Workflow快速打开idea项目</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="/images/alfred/open_idea.gif"></p>
-<ol>
-<li>Mac 安装Alfred</li>
-<li>进行workflow的设置</li>
-</ol>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">keyword--&gt;<span class="keyword">file</span> <span class="built_in">filter</span>--&gt; <span class="keyword">open</span> <span class="keyword">file</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/20/alfred%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80idea%E9%A1%B9%E7%9B%AE/" data-id="cl7mgnxu9007ht2za2ftfcrv5" data-title="Alfred Workflow快速打开idea项目" class="article-share-link">分享</a>
-      
-      
-        <a href="/2020/09/20/alfred%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80idea%E9%A1%B9%E7%9B%AE/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2020/09/20/alfred%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80idea%E9%A1%B9%E7%9B%AE/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/alfred/" rel="tag">alfred</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/" rel="tag">mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/workflow/" rel="tag">workflow</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -918,7 +905,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BPMN/" style="font-size: 11.67px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 11.67px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 10px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 11.67px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 11.67px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
+      <a href="/tags/BPMN/" style="font-size: 13.33px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 13.33px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 11.67px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 13.33px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 13.33px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
     </div>
   </div>
 
@@ -940,6 +927,10 @@
       <ul>
         
           <li>
+            <a href="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/">网关Gateway-排它网关(Exclusive Gateway)</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/10/BPMN2.0/">BPMN2.0</a>
           </li>
         
@@ -953,10 +944,6 @@
         
           <li>
             <a href="/2022/09/04/%E5%90%8D%E4%BA%BA-%E5%BE%90%E6%82%B2%E9%B8%BF-%E7%BA%AA%E5%BF%B5%E9%A6%86/">名人-徐悲鸿-纪念馆</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/04/%E9%9D%99%E9%9D%99%E7%9A%84%E5%81%A5%E8%BA%AB-%E4%BF%9D%E6%8C%81%E5%81%A5%E5%BA%B7/">静静的健身-保持健康</a>
           </li>
         
       </ul>
