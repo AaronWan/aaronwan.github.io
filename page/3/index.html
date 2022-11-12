@@ -73,6 +73,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-paxos" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/09/16/paxos/" class="article-date">
+  <time class="dt-published" datetime="2016-09-16T06:58:22.000Z" itemprop="datePublished">2016-09-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/09/16/paxos/">Paxos</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h2><p>1982，Lamport 提出了一种计算机容错理论，并于1900年论证。<br>这是一种<br>基于消传递且具有高度容错特性的一致性算法，是目前公认的解决分布式一致性问题最有效的算法之一。</p>
+<blockquote>
+<p>时间时钟、面包店算法、拜占庭将军及paxos算法的创建性容错</p>
+</blockquote>
+<h2 id="paxos的目的"><a href="#paxos的目的" class="headerlink" title="paxos的目的"></a>paxos的目的</h2><p>  提高分布式系统容错性的一致性算法</p>
+<h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>  一致性算法</p>
+<h2 id="算法三个角色："><a href="#算法三个角色：" class="headerlink" title="算法三个角色："></a>算法三个角色：</h2><p>  Proposer<br>  Acceptor<br>  Learner</p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><h3 id="paxos-描述："><a href="#paxos-描述：" class="headerlink" title="paxos 描述："></a>paxos 描述：</h3><p>  参与者之间可以进行通信，可以记录一些信息，来确定最终的值<br>  消息内容不会被篡改</p>
+<h3 id="知行学社的分布式系统与Paxos算法-对paxos算法核心思想的描述"><a href="#知行学社的分布式系统与Paxos算法-对paxos算法核心思想的描述" class="headerlink" title="知行学社的分布式系统与Paxos算法 对paxos算法核心思想的描述"></a>知行学社的分布式系统与Paxos算法 对paxos算法核心思想的描述</h3><ul>
+<li><p>在抢占式访问权的基础上引入多acceptor</p>
+</li>
+<li><p>保证一个epoch,只有一个proposer运行，proposer按照epoch递增的顺序依次运行。</p>
+</li>
+<li><p>新的epoch的proposer采用后者认同前者的思路运行。</p>
+</li>
+<li><p>在肯定旧epoch无法生成确定性取值时，新的epoch 会提交自己的取值。不会冲突。</p>
+</li>
+<li><p>一旦旧epoch形成确定性取值，新epoch肯定可以获取到此取值，并且会认同此取值，不会破坏。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/09/16/paxos/" data-id="cl7mgnxu80075t2za2l6tgqug" data-title="Paxos" class="article-share-link">分享</a>
+      
+      
+        <a href="/2016/09/16/paxos/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2016/09/16/paxos/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CAP/" rel="tag">CAP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" rel="tag">一致性算法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="blog-MAC下完成人脸检测代码环境构建" class="h-entry article article-type-blog" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2016/09/15/MAC%E4%B8%8B%E5%AE%8C%E6%88%90%E4%BA%BA%E8%84%B8%E6%A3%80%E6%B5%8B%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA/" class="article-date">
@@ -994,120 +1063,6 @@ public class FileRedisFactory &#123;
 
 
   
-    <article id="detail-jmeter进行压力测试" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2015/10/10/jmeter%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time class="dt-published" datetime="2015-10-09T16:00:00.000Z" itemprop="datePublished">2015-10-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2015/10/10/jmeter%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">JMeter</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>##JMeter是用来做什么的</p>
-<blockquote>
-<p>是一个Apache的一个开源程序，一个100%的针对压力模块和功能压力测试纯Java应用，最初是专门为Web应用程序而设计 的，但是目前已经扩展到别的功能 测试。</p>
-</blockquote>
-<ul>
-<li><p>能做什么？</p>
-<p>用来测试动态 和 静态资源(Webservices(SOAP/REST),Web dynamic languages -PHP,JAva,ASP.NET,Files,etc.Jav)</p>
-</li>
-</ul>
-<p>##如何本地进行服务压力测试</p>
-<ul>
-<li><p>在lib下建一个文件夹，如tests，将所有自己用到的jar，放到这个文件夹中。</p>
-</li>
-<li><p>将自己的测试jar放到 lib/ext下面</p>
-</li>
-<li><p>将自己的程序依赖的jar文件夹，配置到配置文件<br>user.classpath=../lib/tests</p>
-</li>
-</ul>
-<p>##如何分发到不同的机器进行压力测试</p>
-<blockquote>
-<p>参考官方文档<a target="_blank" rel="noopener" href="http://jmeter.apache.org/usermanual/jmeter_distributed_testing_step_by_step.pdf">http://jmeter.apache.org/usermanual/jmeter_distributed_testing_step_by_step.pdf</a></p>
-</blockquote>
-<p>##聚合分析</p>
-<pre><code>Label：每个 JMeter 的 element（例如 HTTP Request）都有一个 Name 属性，这里显示的就是 Name 属性的值
-
-#Samples：表示你这次测试中一共发出了多少个请求，如果模拟10个用户，每个用户迭代10次，那么这里显示100
-
-Average：平均响应时间——默认情况下是单个 Request 的平均响应时间，当使用了 Transaction Controller 时，也可以以Transaction 为单位显示平均响应时间
-
-Median：中位数，也就是 50％ 用户的响应时间
-
-90% Line：90％ 用户的响应时间
-
-Note：关于 50％ 和 90％ 并发用户数的含义，请参考下文
-
-http://www.cnblogs.com/jackei/archive/2006/11/11/557972.html
-
-Min：最小响应时间
-
-Max：最大响应时间
-
-Error%：本次测试中出现错误的请求的数量/请求的总数
-
-Throughput：吞吐量——默认情况下表示每秒完成的请求数（Request per Second），当使用了 Transaction Controller 时，也可以表示类似 LoadRunner 的 Transaction per Second 数
-
-KB/Sec：每秒从服务器端接收到的数据量，相当于LoadRunner中的Throughput/Sec</code></pre>
-<p>###问题</p>
-<p>####Jmeter-server启动失败：Cannot start. Unable to get local host IP address. is a loopback address</p>
-<pre><code>    在Windows下启动Jmeter非常顺利，转到Linux下居然启动失败。
-    想起之前 遇到“/etc/hosts文件设置不对导致Jboss启动失败”， 立马把焦点指向/etc/hosts。
-
-    果然还是这个问题，贴/etc/hosts示例：
-
-    127.0.0.1       localhost.localdomain localhost
-    10.20.10.31   higkoo.rdev.company.net higkoo
-
-    执行命令`hostname`查看当前机器名如果当前机器名与/etc/hosts不一致 ，可手动先执行成一次`hostname yourhostname`或直接加到jmeter-server文件中（注意机器名中不要含域信息，譬如：myname.rdev.company.com。这样设置仍然启动失败）。
-
-    由/etc/hosts文件导致启动失败的错误有：
-    1
-    Created remote object: UnicastServerRef [liveRef: [endpoint:[10.20.10.31:62090](local),objID:[2c639f6d:12794fca52a:-7fff, 712947915258586677]]]
-    Server failed to start: java.rmi.RemoteException: Cannot start. higkoo is a loopback address.
-    2
-    Created remote object: UnicastServerRef [liveRef: [endpoint:[10.20.10.31:38796](local),objID:[-b0d822e:12794fee8b1:-7fff, 8314597152635832475]]]
-    Server failed to start: java.rmi.RemoteException: Cannot start. Unable to get local host IP address.</code></pre>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2015/10/10/jmeter%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" data-id="cl7mgnxtw001rt2za4kp63wsu" data-title="JMeter" class="article-share-link">分享</a>
-      
-      
-        <a href="/2015/10/10/jmeter%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2015/10/10/jmeter%E8%BF%9B%E8%A1%8C%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jmeter/" rel="tag">jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" rel="tag">压力测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">性能测试</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1143,7 +1098,7 @@ KB/Sec：每秒从服务器端接收到的数据量，相当于LoadRunner中的T
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BPMN/" style="font-size: 13.33px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 13.33px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 11.67px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 13.33px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 13.33px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
+      <a href="/tags/BPMN/" style="font-size: 15px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 15px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 13.33px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 15px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 15px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
     </div>
   </div>
 
@@ -1165,6 +1120,10 @@ KB/Sec：每秒从服务器端接收到的数据量，相当于LoadRunner中的T
       <ul>
         
           <li>
+            <a href="/2022/11/12/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E%E5%8F%91%E5%B1%95/">流程引擎发展</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/11/%E7%BD%91%E5%85%B3Gateway/">网关Gateway-排它网关(Exclusive Gateway)</a>
           </li>
         
@@ -1178,10 +1137,6 @@ KB/Sec：每秒从服务器端接收到的数据量，相当于LoadRunner中的T
         
           <li>
             <a href="/2022/09/09/%E9%81%93%E5%BE%B7%E7%BB%8F/">道德经</a>
-          </li>
-        
-          <li>
-            <a href="/2022/09/04/%E5%90%8D%E4%BA%BA-%E5%BE%90%E6%82%B2%E9%B8%BF-%E7%BA%AA%E5%BF%B5%E9%A6%86/">名人-徐悲鸿-纪念馆</a>
           </li>
         
       </ul>

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-11-11T14:51:03.388Z</updated>
+  <updated>2022-11-12T04:08:48.733Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>流程引擎发展</title>
+    <link href="http://example.com/2022/11/12/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E%E5%8F%91%E5%B1%95/"/>
+    <id>http://example.com/2022/11/12/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E%E5%8F%91%E5%B1%95/</id>
+    <published>2022-11-12T04:07:30.000Z</published>
+    <updated>2022-11-12T04:08:48.733Z</updated>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>第一代</th><th>第二代</th><th>第三代</th><th>第三代</th><th>第五代</th><th>第六代</th></tr></thead><tbody><tr><td>2003年， jBPM 1.0发布。<br/> 运行环境：J2EE 过程定义语言：jPDL(当时工作流厂商都有各自的过程定义语言和建模工具) 当时的主流的技术： applets, Swing桌面和EJB</td><td>2004年，jBPM 2.0发布<br/> 同时jBPM加入JBoss基金会. 运行环境：任何JAVA环境(POJO实现过程运行时)，不需要应用服务器</td><td>2005年, jBPM 3.0发布，支持BPEL<br/> - 过程定义语言：过程虚拟机 <br/> - 架构：与二代相比，架构发生了巨大变化。可以操作的业务功能大范围扩展，不仅通过JAVA实现状态机，而且支持建模; <br/> - HIBERNETE作为持久机制并同时提供会话对象的概念， <br/> - 工作流引擎所有的相关性交互都纳入<a href="https://docs.jboss.org/jbpm/v3.2/javadoc-jpdl/org/jbpm/JbpmContext.html">contextual block</a>范畴 <br/> 这为以后的工作流命令设计模式和命令拦截设计模式的广泛应用打下良好的基础 <br/></td><td>2009年， jBPM 4.0 alpha版发布.<br/> - PVM 成功工作流引擎的核心。 <br/> - 过程定义语言：BPMN, jPDL 和 BPEL <br/> - 因为团队人员离开并启动Activiti，正式版没能发布。 <br/> - 主要改进：      - 无状态的服务API      - 运行时和历史数据的分离：保证运行时持久的性能</td><td>2010年, Activiti 1发布<br/> 改变： <br/> - 版权从LGPL转到APACHE. - 过程定义语言：BPMN(唯一) - 从性能和扩展性加强PVM - 多租户支持 - 轻量级架构</td><td>2017年，flowable 6.0发布。<br/> 改变： <br/> - 过程模型：放弃PVM,使用原生BPMN，实现真正的动态过程执行和复杂的过程迁移 - 数据远完全抽象：支持NoSQL - CMMN支持 - 函数式工作流</td></tr><tr><td><br/></td><td><br/></td><td><br/></td><td>Tom Baeyens Effektif 诞生</td><td><br/></td><td><br/></td></tr></tbody></table>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;第一代&lt;/th&gt;
+&lt;th&gt;第二代&lt;/th&gt;
+&lt;th&gt;第三代&lt;/th&gt;
+&lt;th&gt;第三代&lt;/th&gt;
+&lt;th&gt;第五代&lt;/th&gt;
+&lt;th&gt;第六代&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;2003年， jBP</summary>
+      
+    
+    
+    
+    <category term="BPMN" scheme="http://example.com/categories/BPMN/"/>
+    
+    <category term="元素" scheme="http://example.com/categories/BPMN/%E5%85%83%E7%B4%A0/"/>
+    
+    
+    <category term="BPMN" scheme="http://example.com/tags/BPMN/"/>
+    
+    <category term="Flow" scheme="http://example.com/tags/Flow/"/>
+    
+    <category term="流程" scheme="http://example.com/tags/%E6%B5%81%E7%A8%8B/"/>
+    
+    <category term="流程引擎" scheme="http://example.com/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/"/>
+    
+    <category term="元素" scheme="http://example.com/tags/%E5%85%83%E7%B4%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>网关Gateway-排它网关(Exclusive Gateway)</title>
@@ -542,36 +588,6 @@
     <category term="服务治理" scheme="http://example.com/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/"/>
     
     <category term="rpc" scheme="http://example.com/tags/rpc/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Paxos</title>
-    <link href="http://example.com/2016/09/16/paxos/"/>
-    <id>http://example.com/2016/09/16/paxos/</id>
-    <published>2016-09-16T06:58:22.000Z</published>
-    <updated>2022-09-03T10:12:16.077Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="作者介绍"><a href="#作者介绍" class="headerlink" title="作者介绍"></a>作者介绍</h2><p>1982，Lamport 提出了一种计算机容错理论，并于1900年论证。<br>这是一种<br>基于消传递且具有高度容错特性的一致性算法，是目前公认的解决分布式一致性问题最有效的算法之一。</p><blockquote><p>时间时钟、面包店算法、拜占庭将军及paxos算法的创建性容错</p></blockquote><h2 id="paxos的目的"><a href="#paxos的目的" class="headerlink" title="paxos的目的"></a>paxos的目的</h2><p>  提高分布式系统容错性的一致性算法</p><h2 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h2><p>  一致性算法</p><h2 id="算法三个角色："><a href="#算法三个角色：" class="headerlink" title="算法三个角色："></a>算法三个角色：</h2><p>  Proposer<br>  Acceptor<br>  Learner</p><h2 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h2><h3 id="paxos-描述："><a href="#paxos-描述：" class="headerlink" title="paxos 描述："></a>paxos 描述：</h3><p>  参与者之间可以进行通信，可以记录一些信息，来确定最终的值<br>  消息内容不会被篡改</p><h3 id="知行学社的分布式系统与Paxos算法-对paxos算法核心思想的描述"><a href="#知行学社的分布式系统与Paxos算法-对paxos算法核心思想的描述" class="headerlink" title="知行学社的分布式系统与Paxos算法 对paxos算法核心思想的描述"></a>知行学社的分布式系统与Paxos算法 对paxos算法核心思想的描述</h3><ul><li><p>在抢占式访问权的基础上引入多acceptor</p></li><li><p>保证一个epoch,只有一个proposer运行，proposer按照epoch递增的顺序依次运行。</p></li><li><p>新的epoch的proposer采用后者认同前者的思路运行。</p></li><li><p>在肯定旧epoch无法生成确定性取值时，新的epoch 会提交自己的取值。不会冲突。</p></li><li><p>一旦旧epoch形成确定性取值，新epoch肯定可以获取到此取值，并且会认同此取值，不会破坏。</p></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;作者介绍&quot;&gt;&lt;a href=&quot;#作者介绍&quot; class=&quot;headerlink&quot; title=&quot;作者介绍&quot;&gt;&lt;/a&gt;作者介绍&lt;/h2&gt;&lt;p&gt;1982，Lamport 提出了一种计算机容错理论，并于1900年论证。&lt;br&gt;这是一种&lt;br&gt;基于消传递且具有高度容错特性</summary>
-      
-    
-    
-    
-    <category term="技术" scheme="http://example.com/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-    <category term="分布式" scheme="http://example.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
-    
-    <category term="算法" scheme="http://example.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="一致性算法" scheme="http://example.com/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="CAP" scheme="http://example.com/tags/CAP/"/>
     
   </entry>
   
