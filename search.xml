@@ -110,10 +110,10 @@
     
     <entry>
       <title>流程好文章</title>
-      <link href="2022/11/03/BPMN%E5%92%8CDMN%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/"/>
-      <url>2022/11/03/BPMN%E5%92%8CDMN%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%BF%E7%94%A8%E6%A1%88%E4%BE%8B/</url>
+      <link href="2022/11/03/%E6%B5%81%E7%A8%8B%E5%A5%BD%E6%96%87%E7%AB%A0/"/>
+      <url>2022/11/03/%E6%B5%81%E7%A8%8B%E5%A5%BD%E6%96%87%E7%AB%A0/</url>
       
-        <content type="html"><![CDATA[<p><a href="https://blog.csdn.net/qq_35427589/article/details/122678793">BPMN和DMN基本概念和使用案例</a></p>]]></content>
+        <content type="html"><![CDATA[<p>一. 概念相关<br><a href="https://blog.csdn.net/qq_35427589/article/details/122678793">BPMN和DMN基本概念和使用案例</a></p><p>二. 产品及api学习</p><p><a href="https://docs.awspaas.com/user-manual/aws-pass-console-user-manual-process/">炎黄盈动@AWS PaaS流程文档</a></p>]]></content>
       
       
       <categories>
