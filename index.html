@@ -73,6 +73,163 @@
       <div class="outer">
         <section id="main">
   
+    <article id="detail-流程-活动节点" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/" class="article-date">
+  <time class="dt-published" datetime="2022-11-14T14:35:59.000Z" itemprop="datePublished">2022-11-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/BPMN/">BPMN</a>►<a class="article-category-link" href="/categories/BPMN/%E5%85%83%E7%B4%A0/">元素</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/">流程-活动节点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="活动包括子流程和任务"><a href="#活动包括子流程和任务" class="headerlink" title="活动包括子流程和任务"></a>活动包括子流程和任务</h2><p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B4%BB%E5%8A%A8%E7%B1%BB%E5%9B%BE.png"></p>
+<h2 id="通用属性"><a href="#通用属性" class="headerlink" title="通用属性"></a>通用属性</h2><ol>
+<li>isForCompensation: boolean = false<blockquote>
+<p>标识此活动是否用于补偿目的的标志。 如果为false，则此活动作为正常执行流的结果执行。如果为true，则此活动仅在检测到补偿事件并在补偿事件可见性作用域下启动时激活</p>
+</blockquote>
+</li>
+<li>loopCharacteristics: LoopCharac- teristics [0..1]<blockquote>
+<p>一个活动可以执行一次，也可以重复执行。如果是重复的，活动必段定义 loopCharacteristics(如果流程isExecutable属性被设置为true)。</p>
+</blockquote>
+</li>
+<li>resources: ResourceRole [0..*]<blockquote>
+<p>定义将执行或将负责活动的资源。资源，例如执行者，可以以特定的个人、团体、组织角色或职位或组织的形式指定。</p>
+</blockquote>
+</li>
+<li>default: SequenceFlow [0..1]<blockquote>
+<p>默认分支， 当其它条件不满足时 默认走该分支， 该分支不用配置条件。</p>
+</blockquote>
+</li>
+<li>ioSpecification: Input OutputSpecification [0..1]<blockquote>
+<p>定义了活动的输入和输出以及输入集和输出集。</p>
+</blockquote>
+</li>
+<li>properties: Property [0..*]<blockquote>
+<p>其它属性</p>
+</blockquote>
+</li>
+<li>boundaryEventRefs: BoundaryEvent [0..*]<blockquote>
+<p>绑定的边界事件</p>
+</blockquote>
+</li>
+<li>dataInputAssociations: DataIn- putAssociation [0..*]<blockquote>
+<p>可选引用。数据输入关联定义了如何填充活动的输入输出规范的数据输入。</p>
+</blockquote>
+</li>
+<li>dataOutputAssociations: DataOutputAssociation [0..*]<blockquote>
+<p>可选引用。对数据输出关联.</p>
+</blockquote>
+</li>
+<li>startQuantity: integer = 1<blockquote>
+<p>缺省值为1。不小于1。这个属性定义了在活动开始之前不能到达的令牌的数量。</p>
+</blockquote>
+</li>
+<li>completionQuantity: integer = 1<blockquote>
+<p>缺省值为1。不小于1。这个属性定义了从活动中生成的令牌的数量。这个数目的令牌将在任何传出序列流(假设满足任何序列流条件)时发送。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="活动与资源的关系"><a href="#活动与资源的关系" class="headerlink" title="活动与资源的关系"></a>活动与资源的关系</h2><p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B4%BB%E5%8A%A8%E4%B8%8E%E8%B5%84%E6%BA%90%E7%9A%84%E5%85%B3%E7%B3%BB.png"></p>
+<h2 id="任务的标示"><a href="#任务的标示" class="headerlink" title="任务的标示"></a>任务的标示</h2><p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%A0%87%E7%A4%BA.png" alt="image.png"></p>
+<h2 id="任务类图"><a href="#任务类图" class="headerlink" title="任务类图"></a>任务类图</h2><p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E4%BB%BB%E5%8A%A1%E7%B1%BB%E5%9B%BE.png" alt="image.png"></p>
+<h2 id="任务类型说明"><a href="#任务类型说明" class="headerlink" title="任务类型说明"></a>任务类型说明</h2><h3 id="服务任务-Service-Task"><a href="#服务任务-Service-Task" class="headerlink" title="服务任务 Service Task"></a>服务任务 Service Task</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">绑定一个操作，且有输入与输出</span><br><span class="line">implementation: string &#x3D; ##webService</span><br><span class="line">operationRef: Operation [0..1]</span><br></pre></td></tr></table></figure></li>
+<li><p>作用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">调用外部服务</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%9C%8D%E5%8A%A1%E4%BB%BB%E5%8A%A1%E8%A1%A8%E7%A4%BA.png"></p>
+</li>
+<li><p>类图</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%9C%8D%E5%8A%A1%E4%BB%BB%E5%8A%A1%E7%B1%BB%E5%9B%BE.png"></p>
+</li>
+</ol>
+<h3 id="发送消息任务-Send-Task"><a href="#发送消息任务-Send-Task" class="headerlink" title="发送消息任务 Send Task"></a>发送消息任务 Send Task</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">绑定一个消息， 但不是必须的</span><br><span class="line">messageRef: Message [0..1]</span><br><span class="line">operationRef: Operation [0..1]</span><br><span class="line">implementation: string &#x3D; ##webService</span><br></pre></td></tr></table></figure></li>
+<li><p>作用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">发送消息</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E4%BB%BB%E5%8A%A1%E6%A0%87%E7%A4%BA.png"></p>
+</li>
+<li><p>类图</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B6%88%E6%81%AF%E4%BB%BB%E5%8A%A1%E7%B1%BB%E5%9B%BE.png"></p>
+</li>
+</ol>
+<h3 id="接收消息的任务-Receive-Task"><a href="#接收消息的任务-Receive-Task" class="headerlink" title="接收消息的任务 Receive Task"></a>接收消息的任务 Receive Task</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">绑定一个消息， 但不是必须的</span><br><span class="line">messageRef: Message [0..1]</span><br><span class="line">operationRef: Operation [0..1]</span><br><span class="line">implementation: string &#x3D; ##webService</span><br><span class="line">instantiate: boolean &#x3D; false</span><br></pre></td></tr></table></figure></li>
+<li><p>作用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">接收消息， 当接收到消息时自动完成任务；</span><br><span class="line">通常用于启用一个实例；如果想要触发一个实例，需要将属性 instantiate 设置成 true</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E4%BB%BB%E5%8A%A1.png"> </p>
+<p>可作为开始节点 ：</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E5%8F%AF%E4%BB%A5%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%9A%84%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E4%BB%BB%E5%8A%A1.png"></p>
+</li>
+</ol>
+<h3 id="人工任务-User-Task"><a href="#人工任务-User-Task" class="headerlink" title="人工任务 User Task"></a>人工任务 User Task</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">配置任务处理人</span><br></pre></td></tr></table></figure></li>
+<li><p>作用</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">人员参与完成任务</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E4%BA%BA%E5%B7%A5%E8%8A%82%E7%82%B9%E6%A0%87%E7%A4%BA.png"></p>
+</li>
+</ol>
+<h3 id="操作任务-Manual-Task"><a href="#操作任务-Manual-Task" class="headerlink" title="操作任务 Manual Task"></a>操作任务 Manual Task</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   &#96;&#96;&#96;</span><br><span class="line">2. 作用</span><br><span class="line">   &#96;&#96;&#96;textmate</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%93%8D%E4%BD%9C%E4%BB%BB%E5%8A%A1.png"></p>
+</li>
+</ol>
+<h3 id="业务规则节点-Business-Rule"><a href="#业务规则节点-Business-Rule" class="headerlink" title="业务规则节点 Business Rule"></a>业务规则节点 Business Rule</h3><ol>
+<li><p>属性</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   &#96;&#96;&#96;</span><br><span class="line">2. 作用</span><br><span class="line">   &#96;&#96;&#96;textmate</span><br></pre></td></tr></table></figure></li>
+<li><p>标示</p>
+<p><img src="/2022-11-14-%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%93%8D%E4%BD%9C%E4%BB%BB%E5%8A%A1.png"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/" data-id="clagw892y0000u3544h3tf333" data-title="流程-活动节点" class="article-share-link">分享</a>
+      
+      
+        <a href="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BPMN/" rel="tag">BPMN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flow/" rel="tag">Flow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%83%E7%B4%A0/" rel="tag">元素</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B/" rel="tag">流程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" rel="tag">流程引擎</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="detail-流程-事件" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/13/%E6%B5%81%E7%A8%8B-%E4%BA%8B%E4%BB%B6/" class="article-date">
@@ -895,66 +1052,6 @@
 
 
   
-    <article id="detail-2015-01-1-PYTHON-初次接触" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/09/03/2015-01-1-PYTHON-%E5%88%9D%E6%AC%A1%E6%8E%A5%E8%A7%A6/" class="article-date">
-  <time class="dt-published" datetime="2022-09-03T10:12:16.071Z" itemprop="datePublished">2022-09-03</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/%E8%AF%AD%E8%A8%80/">语言</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/03/2015-01-1-PYTHON-%E5%88%9D%E6%AC%A1%E6%8E%A5%E8%A7%A6/">The Zen of Python, by Tim Peters</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>=============</p>
-<blockquote>
-<p>由于自己对新知识的好奇，2014年被一位朋友吸引，当时遇到他时，他是在坚持用python进行实现自己的功能。同时用的是vim进行编写，而之前我一直是用<br>IDE<br>,2015年初，我开始了解python,首先我接触到的就是</p>
-</blockquote>
-<pre><code>    <figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line">import this</span><br><span class="line"></span><br><span class="line">The Zen of Python</span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>*<span class="strong">*Python的原则*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Beautiful is better than ugly.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*优美胜于丑陋（Python 以编写优美的代码为目标）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Explicit is better than implicit.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*明了胜于晦涩（优美的代码应当是明了的，命名规范，风格相似）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Simple is better than complex.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*简洁胜于复杂（优美的代码应当是简洁的，不要有复杂的内部实现）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Complex is better than complicated.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*复杂胜于凌乱（如果复杂不可避免，那代码间也不能有难懂的关系，要保持接口简洁）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Flat is better than nested.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*扁平胜于嵌套（优美的代码应当是扁平的，不能有太多的嵌套） *</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Sparse is better than dense.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*间隔胜于紧凑（优美的代码有适当的间隔，不要奢望一行代码解决问题）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Readability counts.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*可读性很重要（优美的代码是可读的）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Special cases aren&#x27;t special enough to break the rules.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*即便假借特例的实用性之名，也不可违背这些规则（这些规则至高无上）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Although practicality beats purity.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Errors should never pass silently.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*不要包容所有错误，除非你确定需要这样做（精准地捕获异常，不写 except:pass 风格的代码）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Unless explicitly silenced.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">In the face of ambiguity, refuse the temptation to guess.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*当存在多种可能，不要尝试去猜测*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">There should be one-- and preferably only one --obvious way to do it.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*而是尽量找一种，最好是唯一一种明显的解决方案（如果不确定，就用穷举法）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Although that way may not be obvious at first unless you&#x27;re Dutch.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*虽然这并不容易，因为你不是 Python 之父（这里的 Dutch 是指 Guido ）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Now is better than never.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Although never is often better than *</span>right* now.</span><br><span class="line"></span><br><span class="line"><span class="bullet">- </span>*<span class="strong">*做也许好过不做，但不假思索就动手还不如不做（动手之前要细思量） *</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">If the implementation is hard to explain, it&#x27;s a bad idea.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">If the implementation is easy to explain, it may be a good idea.</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*如果你无法向人描述你的方案，那肯定不是一个好方案；反之亦然（方案测评标准）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">Namespaces are one honking great idea -- let&#x27;s do more of those!</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">- *</span><span class="strong">*命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）*</span><span class="strong">*</span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong"></span></span><br><span class="line"><span class="strong">---- by Tim Peters</span></span><br><span class="line"><span class="strong"></span></span><br></pre></td></tr></table></figure></code></pre>
-<hr>
-<ul>
-<li>python  也用了一段时间，感觉他和javascript很像，但是只是感觉，具体哪里像，后面我会归档一下，同时也是为自己理清思路。</li>
-<li>她与java的区别，我目前感觉两种语言，只是语法上的不同，没有感觉到非常大的差别，我也会单独整理一份这两个语言的差别。但自己学习。</li>
-</ul>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/03/2015-01-1-PYTHON-%E5%88%9D%E6%AC%A1%E6%8E%A5%E8%A7%A6/" data-id="cl7mgnxtl0001t2za9cpt1ul8" data-title="The Zen of Python, by Tim Peters" class="article-share-link">分享</a>
-      
-      
-        <a href="/2022/09/03/2015-01-1-PYTHON-%E5%88%9D%E6%AC%A1%E6%8E%A5%E8%A7%A6/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2022/09/03/2015-01-1-PYTHON-%E5%88%9D%E6%AC%A1%E6%8E%A5%E8%A7%A6/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -990,7 +1087,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BPMN/" style="font-size: 16.67px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 16.67px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 15px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 16.67px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 16.67px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
+      <a href="/tags/BPMN/" style="font-size: 18.33px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 18.33px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 16.67px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 18.33px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 18.33px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
     </div>
   </div>
 
@@ -1012,6 +1109,10 @@
       <ul>
         
           <li>
+            <a href="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/">流程-活动节点</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/13/%E6%B5%81%E7%A8%8B-%E4%BA%8B%E4%BB%B6/">流程-事件</a>
           </li>
         
@@ -1025,10 +1126,6 @@
         
           <li>
             <a href="/2022/11/10/BPMN2.0/">BPMN2.0</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/03/%E6%B5%81%E7%A8%8B%E5%A5%BD%E6%96%87%E7%AB%A0/">流程好文章</a>
           </li>
         
       </ul>

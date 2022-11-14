@@ -73,6 +73,432 @@
       <div class="outer">
         <section id="main">
   
+    <article id="detail-redis致命错误的出现" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2015/11/22/redis%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF%E7%9A%84%E5%87%BA%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2015-11-21T16:00:00.000Z" itemprop="datePublished">2015-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>►<a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">问题总结</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2015/11/22/redis%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF%E7%9A%84%E5%87%BA%E7%8E%B0/">redis致命错误的出现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>#错误描述<br>我们将文件缓存到redis,但是在线上出现了一个问题，就是A企业群中发的文件，在B企业群中看文件时却看到了A企业群中的图片。</p>
+<p>#经排查，结果如下：</p>
+<p>##案例代码如下：</p>
+<pre><code>    import com.google.common.collect.Lists;
+    import org.apache.commons.lang3.StringUtils;
+    import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+    import org.slf4j.Logger;
+    import org.slf4j.LoggerFactory;
+    import redis.clients.jedis.Jedis;
+    import redis.clients.jedis.JedisPool;
+
+    import java.util.Arrays;
+    import java.util.Collections;
+    import java.util.List;
+    import java.util.concurrent.*;
+
+    /**
+     * Created by Aaron on 15/11/12.
+     */
+    public class FileRedisFactory &#123;
+        private static Logger log = LoggerFactory.getLogger(FileRedisFactory.class);
+        public ThreadPoolExecutor threadPoolExecutor;
+        // 格式为 ： 127.0.0.1:6379#0;127.0.0.2:6379#1    IP:PORT#index
+        private String hosts;
+        private String password;
+        private int size;
+        private List&lt;JedisPool&gt; pools=Lists.newArrayList();//连接池
+
+        public FileRedisFactory(String hosts, String password) &#123;
+            this.hosts = hosts;
+            this.password = password;
+            this.init(hosts, password);
+        &#125;
+
+        public FileRedisFactory(String hosts) &#123;
+            this.hosts = hosts;
+            this.init(hosts, null);
+        &#125;
+
+
+        private synchronized void init(String hosts, String password) &#123;
+            if (StringUtils.isNotEmpty(hosts)) &#123;
+                String[] hostsArray = hosts.split(&quot;;&quot;);
+                List&lt;String&gt; hostList = Arrays.asList(hostsArray);
+                Collections.sort(hostList);
+                System.out.println(hostList);
+                for (String host : hostList) &#123;
+                    try &#123;
+                        String[] uriDb=host.split(&quot;#&quot;);
+                        String[] host_port = uriDb[0].split(&quot;:&quot;);
+                        String ip = host_port[0];
+                        String port = host_port[1];
+                        int index=uriDb.length&gt;0?Integer.valueOf(uriDb[1]):0;
+                        GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+
+                        poolConfig.setMaxTotal(16);
+                        poolConfig.setMaxIdle(16);
+                        if (StringUtils.isNotEmpty(password)) &#123;
+                            pools.add(new JedisPool(poolConfig, ip, Integer.valueOf(port), 2000, password, index));
+                        &#125; else &#123;
+                            pools.add(new JedisPool(poolConfig, ip, Integer.valueOf(port), 2000, null, index));
+                        &#125;
+                    &#125; catch (Exception e) &#123;
+                        pools = Lists.newArrayList();
+                        e.printStackTrace();
+                        log.error(&quot;[ShardedRedisFactory] [initByShard] [error] [hosts:&quot; + hosts + &quot;] [password:&quot; + password + &quot;]&quot;, e);
+                    &#125;
+                &#125;
+                size = pools.size();
+            &#125;
+            this.threadPoolExecutor = new ThreadPoolExecutor(10,20,3, TimeUnit.MINUTES,new LinkedBlockingDeque&lt;&gt;(),new ThreadPoolExecutor.DiscardPolicy());
+
+            // 构造池
+            log.info(&quot;[ShardedRedisFactory] [initByShard] [success] [hosts:&#123;&#125;] [password:&#123;&#125;] [masterName:&#123;&#125;] [pool:&#123;&#125;]&quot;, hosts, password);
+        &#125;
+
+        private JedisPool getJedisPool(int c) &#123;
+            int index = c % size;
+            return pools.get(index);
+        &#125;
+
+        private static int getIndexFromPath(String path) &#123;
+            String first=path.split(&quot;\\.&quot;)[0];
+            return  first.charAt(first.length() - 1);
+        &#125;
+
+        /**
+         * @param filePath file path
+         * @return
+         */
+        public byte[] get(String filePath) &#123;
+            if (cacheIsAvailable()) return null;
+            JedisPool jedisPool = getJedisPool(getIndexFromPath(filePath));
+            Jedis jedis = null;
+            try &#123;
+                jedis = jedisPool.getResource();
+                return jedis.get(filePath.getBytes());
+            &#125; catch (Exception e) &#123;
+                log.error(e.getMessage());
+                return null;
+            &#125; finally &#123;
+                if (jedis != null)
+                    jedisPool.returnResource(jedis);
+            &#125;
+        &#125;
+
+        public void asynSet(String filePath, byte[] datas)&#123;
+            if (cacheIsAvailable()) return;
+            threadPoolExecutor.execute(()-&gt;&#123;
+                    JedisPool jedisPool = getJedisPool(getIndexFromPath(filePath));
+                    Jedis jedis = null;
+                    try &#123;
+                        jedis = jedisPool.getResource();
+                        jedis.set(filePath.getBytes(), datas);
+                    &#125; catch (Exception e) &#123;
+                        log.error(e.getMessage());
+                    &#125; finally &#123;
+                        if (jedis != null)
+                            jedisPool.returnResource(jedis);
+                    &#125;
+            &#125;);
+        &#125;
+        private boolean cacheIsAvailable() &#123;
+            if(pools.size()==0)&#123;
+                return true;
+            &#125;
+            return false;
+        &#125;
+
+    &#125;</code></pre>
+<p>##测试代码如下</p>
+<pre><code>        public static void main(String[] args) &#123;
+            FileRedisFactory fileRedisFactory = new FileRedisFactory(&quot;172.31.xxx.xxx:6379#0;172.31.xx.xxx:6379#1;172.31.xxx.xxx:6379#2;172.31.xxx.xxx:6379#3&quot;);
+            System.out.println(fileRedisFactory);
+            Map&lt;String,String&gt; map=new HashMap&lt;&gt;();
+
+            for(int i=0;i&lt;20;i++)&#123;
+                map.put(&quot;&quot;+i,&quot;&quot;+i);
+            &#125;
+
+            for (int j = 0; j &lt;50 ; j++) &#123;
+                Thread thread=new Thread()&#123;
+                    @Override
+                    public void run() &#123;
+                        while(true)&#123;
+                            Set&lt;String&gt; s=map.keySet();
+
+                            s.forEach(i-&gt;&#123;
+                                fileRedisFactory.set(i + &quot;&quot;, (i + &quot;&quot;).getBytes());
+                            &#125;);
+                        &#125;
+                    &#125;
+                &#125;;
+                thread.start();
+            &#125;
+            for (int k = 0; k &lt;50 ; k++) &#123;
+                Thread thread=new Thread()&#123;
+                    @Override
+                    public void run() &#123;
+                        while(true)&#123;
+                            Set&lt;String&gt; s=map.keySet();
+                            s.forEach(i-&gt;&#123;
+                                byte[] first=fileRedisFactory.get(i+&quot;&quot;);
+                                if(first==null)&#123;
+                                    System.out.println(i+&quot;&quot;+first);
+                                    return;
+                                &#125;
+                                try&#123;
+                                String temp=(new String(first));
+                                if(!temp.equals(i+&quot;&quot;))&#123;
+                                    System.out.println(i+&quot;======&quot;+temp);
+                                    System.exit(-1);
+                                &#125;&#125;catch(Exception e)&#123;
+                                    e.printStackTrace();
+                                &#125;
+                            &#125;);
+                        &#125;
+                    &#125;
+                &#125;;
+                thread.start();
+            &#125;
+        &#125;</code></pre>
+<p>若你和连接到redis服务器之间的网络不是很稳定<br>在运行时，我们会发现，有奇怪的现像出现：</p>
+<pre><code>    1======2
+    3======8</code></pre>
+<p>这时，我们就在对redis操作时，异常的地方修改成如下代码：</p>
+<pre><code>    catch (Exception e) &#123;
+          log.error(e.getMessage());
+          e.printStackTrace();
+          return null;
+    &#125; </code></pre>
+<p>就会看到报TimeOut的Exception</p>
+<pre><code>我们将：
+        &lt;dependency&gt;
+            &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+            &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+            &lt;version&gt;2.6.2&lt;/version&gt;
+        &lt;/dependency&gt;
+
+替换成：
+        &lt;dependency&gt;
+            &lt;groupId&gt;redis.clients&lt;/groupId&gt;
+            &lt;artifactId&gt;jedis&lt;/artifactId&gt;
+            &lt;version&gt;2.7.3&lt;/version&gt;
+        &lt;/dependency&gt;</code></pre>
+<p>这时我们去Google上查询的同时也看了一下新的代码，<br>     我们原来用的：</p>
+<pre><code>    jedisPool.returnResource(jedis);
+
+ 已经变成了：
+
+
+   /**
+    * @deprecated starting from Jedis 3.0 this method won&#39;t exist. Resouce cleanup should be done
+    *             using @see &#123;@link redis.clients.jedis.Jedis#close()&#125;
+    */
+   @Deprecated
+   public void returnResource(final Jedis resource) &#123;
+     if (resource != null) &#123;
+       try &#123;
+         resource.resetState();
+         returnResourceObject(resource);
+       &#125; catch (Exception e) &#123;
+         returnBrokenResource(resource);
+         throw new JedisException(&quot;Could not return the resource to the pool&quot;, e);
+       &#125;
+     &#125;
+   &#125;</code></pre>
+<p>同时我们也查到了一个文章<a target="_blank" rel="noopener" href="http://www.cnblogs.com/wcd144140/p/4883139.html">JedisPool异常Jedis链接处理</a></p>
+<p>#修改后的代码：</p>
+<pre><code>import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.*;
+
+/**
+ * Created by Aaron on 15/11/12.
+ */
+public class FileRedisFactory &#123;
+    private static Logger log = LoggerFactory.getLogger(FileRedisFactory.class);
+    public ThreadPoolExecutor threadPoolExecutor;
+    // 格式为 ： 127.0.0.1:6379#0;127.0.0.2:6379#1    IP:PORT#index
+    private String hosts;
+    private String password;
+    private int size;
+    private List&lt;JedisPool&gt; pools=Lists.newArrayList();//连接池
+
+    public FileRedisFactory(String hosts, String password) &#123;
+        this.hosts = hosts;
+        this.password = password;
+        this.init(hosts, password);
+    &#125;
+
+    public FileRedisFactory(String hosts) &#123;
+        this.hosts = hosts;
+        this.init(hosts, null);
+    &#125;
+
+
+    private synchronized void init(String hosts, String password) &#123;
+        if (StringUtils.isNotEmpty(hosts)) &#123;
+            String[] hostsArray = hosts.split(&quot;;&quot;);
+            List&lt;String&gt; hostList = Arrays.asList(hostsArray);
+            Collections.sort(hostList);
+            System.out.println(hostList);
+            for (String host : hostList) &#123;
+                try &#123;
+                    String[] uriDb=host.split(&quot;#&quot;);
+                    String[] host_port = uriDb[0].split(&quot;:&quot;);
+                    String ip = host_port[0];
+                    String port = host_port[1];
+                    int index=uriDb.length&gt;0?Integer.valueOf(uriDb[1]):0;
+                    GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+
+                    poolConfig.setMaxTotal(16);
+                    poolConfig.setMaxIdle(16);
+                    if (StringUtils.isNotEmpty(password)) &#123;
+                        pools.add(new JedisPool(poolConfig, ip, Integer.valueOf(port), 2000, password, index));
+                    &#125; else &#123;
+                        pools.add(new JedisPool(poolConfig, ip, Integer.valueOf(port), 2000, null, index));
+                    &#125;
+                &#125; catch (Exception e) &#123;
+                    pools = Lists.newArrayList();
+                    log.error(&quot;[ShardedRedisFactory] [initByShard] [error] [hosts:&quot; + hosts + &quot;] [password:&quot; + password + &quot;]&quot;, e);
+                &#125;
+            &#125;
+            size = pools.size();
+        &#125;
+
+        this.threadPoolExecutor = new ThreadPoolExecutor(10,20,3, TimeUnit.MINUTES,new LinkedBlockingDeque&lt;&gt;(50),new ThreadPoolExecutor.DiscardPolicy());
+
+        // 构造池
+        log.info(&quot;[ShardedRedisFactory] [initByShard] [success] [hosts:&#123;&#125;] [password:&#123;&#125;] [masterName:&#123;&#125;] [pool:&#123;&#125;]&quot;, hosts, password);
+    &#125;
+
+    private JedisPool getJedisPool(int c) &#123;
+        int index = c % size;
+        return pools.get(index);
+    &#125;
+
+    private static int getIndexFromPath(String path) &#123;
+        String first=path.split(&quot;\\.&quot;)[0];
+        return  first.charAt(first.length() - 1);
+    &#125;
+
+    /**
+     * @param filePath file path
+     * @return
+     */
+    public byte[] get(String filePath) &#123;
+        if (cacheIsAvailable()) return null;
+        JedisPool jedisPool = getJedisPool(getIndexFromPath(filePath));
+        Jedis jedis = null;
+        try &#123;
+            jedis = jedisPool.getResource();
+            return jedis.get(filePath.getBytes());
+        &#125; catch (Exception e) &#123;
+            log.error(e.getMessage());
+            return null;
+        &#125; finally &#123;
+            if (jedis != null)
+                jedis.close();
+        &#125;
+    &#125;
+
+    public String set(String filePath, byte[] datas) &#123;
+        if (cacheIsAvailable()) return null;
+        JedisPool jedisPool = getJedisPool(getIndexFromPath(filePath));
+        Jedis jedis = null;
+        try &#123;
+            jedis = jedisPool.getResource();
+            return jedis.set(filePath.getBytes(), datas);
+        &#125; catch (Exception e) &#123;
+            log.error(e.getMessage());
+            return null;
+        &#125; finally &#123;
+            if (jedis != null)
+                jedis.close();
+        &#125;
+    &#125;
+
+    public void asynSet(String filePath, byte[] datas,long expx)&#123;
+        if (cacheIsAvailable()) return;
+        threadPoolExecutor.execute(()-&gt;&#123;
+                JedisPool jedisPool = getJedisPool(getIndexFromPath(filePath));
+                Jedis jedis = null;
+                try &#123;
+                    jedis = jedisPool.getResource();
+                    jedis.set(filePath.getBytes(), datas,&quot;NX&quot;.getBytes(),&quot;EX&quot;.getBytes(),expx);
+                &#125; catch (Exception e) &#123;
+                    log.error(e.getMessage());
+                &#125; finally &#123;
+                    if (jedis != null)
+                        jedis.close();
+                &#125;
+        &#125;);
+    &#125;
+    private boolean cacheIsAvailable() &#123;
+        if(pools.size()==0)&#123;
+            return true;
+        &#125;
+        return false;
+    &#125;
+
+&#125;</code></pre>
+<p>#总结：</p>
+<ol>
+<li>在使用做新功能时，方便时要添加开关或合理的回滚方案，方便快速的回滚减少事故的影响</li>
+<li>排查错误，一查到底</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2015/11/22/redis%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF%E7%9A%84%E5%87%BA%E7%8E%B0/" data-id="cl7mgnxtx0022t2za51eh9nc2" data-title="redis致命错误的出现" class="article-share-link">分享</a>
+      
+      
+        <a href="/2015/11/22/redis%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF%E7%9A%84%E5%87%BA%E7%8E%B0/#comments" class="article-comment-link">
+          <span class="post-comments-count valine-comment-count" data-xid="/2015/11/22/redis%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF%E7%9A%84%E5%87%BA%E7%8E%B0/" itemprop="commentCount"></span>
+          留言
+        </a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bug/" rel="tag">bug</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%93%E5%AD%98/" rel="tag">缓存</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="detail-ansible的安装与使用" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2015/10/30/ansible%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="article-date">
@@ -1077,55 +1503,6 @@ GoF这样定义:
 
 
   
-    <article id="detail-JAVA多线程之ExecutorService" class="h-entry article article-type-detail" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BExecutorService/" class="article-date">
-  <time class="dt-published" datetime="2015-09-11T16:00:00.000Z" itemprop="datePublished">2015-09-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BExecutorService/">Java thread 多线程 ExecutorService</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BExecutorService/" data-id="cl7mgnxtu000xt2zads544njd" data-title="Java thread 多线程 ExecutorService" class="article-share-link">分享</a>
-      
-      
-        <a href="/2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BExecutorService/#comments" class="article-comment-link">
-          <span class="post-comments-count valine-comment-count" data-xid="/2015/09/12/JAVA%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B9%8BExecutorService/" itemprop="commentCount"></span>
-          留言
-        </a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1161,7 +1538,7 @@ GoF这样定义:
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/BPMN/" style="font-size: 16.67px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 16.67px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 15px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 16.67px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 16.67px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
+      <a href="/tags/BPMN/" style="font-size: 18.33px;">BPMN</a> <a href="/tags/CAP/" style="font-size: 11.67px;">CAP</a> <a href="/tags/Flow/" style="font-size: 18.33px;">Flow</a> <a href="/tags/GIS/" style="font-size: 10px;">GIS</a> <a href="/tags/Protobuf/" style="font-size: 10px;">Protobuf</a> <a href="/tags/alfred/" style="font-size: 10px;">alfred</a> <a href="/tags/angularjs/" style="font-size: 15px;">angularjs</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/arm/" style="font-size: 10px;">arm</a> <a href="/tags/book/" style="font-size: 11.67px;">book</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/django/" style="font-size: 10px;">django</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/fastcgi/" style="font-size: 10px;">fastcgi</a> <a href="/tags/fastfs/" style="font-size: 10px;">fastfs</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/ionic/" style="font-size: 15px;">ionic</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jdk8-java/" style="font-size: 11.67px;">jdk8.java</a> <a href="/tags/jmeter/" style="font-size: 10px;">jmeter</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 10px;">linux命令</a> <a href="/tags/mac/" style="font-size: 11.67px;">mac</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mp3/" style="font-size: 10px;">mp3</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/nocomment/" style="font-size: 10px;">nocomment</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/rpc/" style="font-size: 10px;">rpc</a> <a href="/tags/rsa/" style="font-size: 10px;">rsa</a> <a href="/tags/schedule/" style="font-size: 10px;">schedule</a> <a href="/tags/workflow/" style="font-size: 10px;">workflow</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/" style="font-size: 10px;">一致性算法</a> <a href="/tags/%E4%BA%BA%E7%94%9F/" style="font-size: 13.33px;">人生</a> <a href="/tags/%E4%BA%BA%E7%94%9F%E6%84%9F%E6%82%9F/" style="font-size: 10px;">人生感悟</a> <a href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" style="font-size: 10px;">人脸识别</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E4%BB%93%E5%BA%93/" style="font-size: 10px;">代码仓库</a> <a href="/tags/%E5%81%A5%E5%BA%B7/" style="font-size: 10px;">健康</a> <a href="/tags/%E5%85%83%E7%B4%A0/" style="font-size: 16.67px;">元素</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86/" style="font-size: 10px;">加密解密</a> <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">压力测试</a> <a href="/tags/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86/" style="font-size: 11.67px;">图片处理</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 15px;">多线程</a> <a href="/tags/%E5%AD%98%E5%82%A8/" style="font-size: 10px;">存储</a> <a href="/tags/%E5%AE%9A%E6%97%B6/" style="font-size: 10px;">定时</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">工具</a> <a href="/tags/%E5%B9%B6%E5%8F%91/" style="font-size: 10px;">并发</a> <a href="/tags/%E5%BE%90%E6%82%B2%E9%B8%BF/" style="font-size: 10px;">徐悲鸿</a> <a href="/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">性能测试</a> <a href="/tags/%E6%84%9F%E6%82%9F/" style="font-size: 11.67px;">感悟</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E6%B2%BB%E7%90%86/" style="font-size: 11.67px;">服务治理</a> <a href="/tags/%E6%9F%A5%E6%89%BE/" style="font-size: 10px;">查找</a> <a href="/tags/%E6%B5%81%E7%A8%8B/" style="font-size: 18.33px;">流程</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E5%BC%95%E6%93%8E/" style="font-size: 18.33px;">流程引擎</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%88%AC%E5%B1%B1/" style="font-size: 10px;">爬山</a> <a href="/tags/%E7%96%91%E6%83%91/" style="font-size: 11.67px;">疑惑</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 18.33px;">算法</a> <a href="/tags/%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">经验</a> <a href="/tags/%E7%BB%98%E7%94%BB/" style="font-size: 10px;">绘画</a> <a href="/tags/%E7%BC%93%E5%AD%98/" style="font-size: 11.67px;">缓存</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 15px;">设计模式</a> <a href="/tags/%E8%BD%AF%E4%BB%B6/" style="font-size: 10px;">软件</a> <a href="/tags/%E8%BF%90%E5%8A%A8/" style="font-size: 10px;">运动</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 11.67px;">运维</a> <a href="/tags/%E9%9F%B3%E4%B9%90/" style="font-size: 10px;">音乐</a> <a href="/tags/%E9%9F%B3%E9%A2%91%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">音频转换</a>
     </div>
   </div>
 
@@ -1183,6 +1560,10 @@ GoF这样定义:
       <ul>
         
           <li>
+            <a href="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/">流程-活动节点</a>
+          </li>
+        
+          <li>
             <a href="/2022/11/13/%E6%B5%81%E7%A8%8B-%E4%BA%8B%E4%BB%B6/">流程-事件</a>
           </li>
         
@@ -1196,10 +1577,6 @@ GoF这样定义:
         
           <li>
             <a href="/2022/11/10/BPMN2.0/">BPMN2.0</a>
-          </li>
-        
-          <li>
-            <a href="/2022/11/03/%E6%B5%81%E7%A8%8B%E5%A5%BD%E6%96%87%E7%AB%A0/">流程好文章</a>
           </li>
         
       </ul>
