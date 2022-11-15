@@ -99,51 +99,40 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="活动包括子流程和任务"><a href="#活动包括子流程和任务" class="headerlink" title="活动包括子流程和任务"></a>活动包括子流程和任务</h2><p><img src="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B4%BB%E5%8A%A8%E7%B1%BB%E5%9B%BE.png"></p>
+        <h2 id="活动包括子流程和任务"><a href="#活动包括子流程和任务" class="headerlink" title="活动包括子流程和任务"></a>活动包括子流程和任务</h2><p><img src="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B4%BB%E5%8A%A8%E7%B1%BB%E5%9B%BE.png" alt="活动类图"></p>
 <h2 id="通用属性"><a href="#通用属性" class="headerlink" title="通用属性"></a>通用属性</h2><ol>
-<li>isForCompensation: boolean = false<blockquote>
+<li><p>isForCompensation: boolean = false</p>
 <p>标识此活动是否用于补偿目的的标志。 如果为false，则此活动作为正常执行流的结果执行。如果为true，则此活动仅在检测到补偿事件并在补偿事件可见性作用域下启动时激活</p>
-</blockquote>
 </li>
-<li>loopCharacteristics: LoopCharac- teristics [0..1]<blockquote>
+<li><p>loopCharacteristics: LoopCharac- teristics [0..1]</p>
 <p>一个活动可以执行一次，也可以重复执行。如果是重复的，活动必段定义 loopCharacteristics(如果流程isExecutable属性被设置为true)。</p>
-</blockquote>
 </li>
-<li>resources: ResourceRole [0..*]<blockquote>
+<li><p>resources: ResourceRole [0..*]</p>
 <p>定义将执行或将负责活动的资源。资源，例如执行者，可以以特定的个人、团体、组织角色或职位或组织的形式指定。</p>
-</blockquote>
 </li>
-<li>default: SequenceFlow [0..1]<blockquote>
+<li><p>default: SequenceFlow [0..1]</p>
 <p>默认分支， 当其它条件不满足时 默认走该分支， 该分支不用配置条件。</p>
-</blockquote>
 </li>
-<li>ioSpecification: Input OutputSpecification [0..1]<blockquote>
+<li><p>ioSpecification: Input OutputSpecification [0..1]</p>
 <p>定义了活动的输入和输出以及输入集和输出集。</p>
-</blockquote>
 </li>
-<li>properties: Property [0..*]<blockquote>
+<li><p>properties: Property [0..*]</p>
 <p>其它属性</p>
-</blockquote>
 </li>
-<li>boundaryEventRefs: BoundaryEvent [0..*]<blockquote>
+<li><p>boundaryEventRefs: BoundaryEvent [0..*]</p>
 <p>绑定的边界事件</p>
-</blockquote>
 </li>
-<li>dataInputAssociations: DataIn- putAssociation [0..*]<blockquote>
+<li><p>dataInputAssociations: DataIn- putAssociation [0..*]</p>
 <p>可选引用。数据输入关联定义了如何填充活动的输入输出规范的数据输入。</p>
-</blockquote>
 </li>
-<li>dataOutputAssociations: DataOutputAssociation [0..*]<blockquote>
+<li><p>dataOutputAssociations: DataOutputAssociation [0..*]</p>
 <p>可选引用。对数据输出关联.</p>
-</blockquote>
 </li>
-<li>startQuantity: integer = 1<blockquote>
+<li><p>startQuantity: integer = 1</p>
 <p>缺省值为1。不小于1。这个属性定义了在活动开始之前不能到达的令牌的数量。</p>
-</blockquote>
 </li>
-<li>completionQuantity: integer = 1<blockquote>
+<li><p>completionQuantity: integer = 1</p>
 <p>缺省值为1。不小于1。这个属性定义了从活动中生成的令牌的数量。这个数目的令牌将在任何传出序列流(假设满足任何序列流条件)时发送。</p>
-</blockquote>
 </li>
 </ol>
 <h2 id="活动与资源的关系"><a href="#活动与资源的关系" class="headerlink" title="活动与资源的关系"></a>活动与资源的关系</h2><p><img src="/2022/11/14/%E6%B5%81%E7%A8%8B-%E6%B4%BB%E5%8A%A8%E8%8A%82%E7%82%B9/images/%E6%B4%BB%E5%8A%A8%E4%B8%8E%E8%B5%84%E6%BA%90%E7%9A%84%E5%85%B3%E7%B3%BB.png"></p>
