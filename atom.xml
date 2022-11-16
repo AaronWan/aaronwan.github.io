@@ -170,9 +170,9 @@
     <link href="http://example.com/2022/11/10/BPMN2.0/"/>
     <id>http://example.com/2022/11/10/BPMN2.0/</id>
     <published>2022-11-10T14:42:50.000Z</published>
-    <updated>2022-11-11T13:47:58.237Z</updated>
+    <updated>2022-11-16T15:01:12.535Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Version 2.0</span><br><span class="line">OMG Document Number: formal/2011-01-03</span><br><span class="line">Standard document URL: http://www.omg.org/spec/BPMN/2.0</span><br></pre></td></tr></table></figure><p>一. 元素分类</p><table><thead><tr><th>分类</th></tr></thead><tbody><tr><td>事件 event</td></tr><tr><td>任务 task</td></tr><tr><td>子流程 sub-processes</td></tr><tr><td>CallActivity</td></tr><tr><td>网关 Gateway</td></tr><tr><td>泳道 Lane</td></tr><tr><td>数据 Data Object</td></tr><tr><td>消息,组,备注 Message,Group,Text Annotation</td></tr><tr><td>线 Sequence Flow</td></tr><tr><td>消息 Message Flow</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Version 2.0</span><br><span class="line">OMG Document Number: formal/2011-01-03</span><br><span class="line">Standard document URL: http://www.omg.org/spec/BPMN/2.0</span><br></pre></td></tr></table></figure><p>一. 流程引擎发展</p><p>二. 流程元素</p><table><thead><tr><th>分类</th></tr></thead><tbody><tr><td>事件 event</td></tr><tr><td>任务 task</td></tr><tr><td>子流程 sub-processes</td></tr><tr><td>CallActivity</td></tr><tr><td>网关 Gateway</td></tr><tr><td>泳道 Lane</td></tr><tr><td>数据 Data Object</td></tr><tr><td>消息,组,备注 Message,Group,Text Annotation</td></tr><tr><td>线 Sequence Flow</td></tr><tr><td>消息 Message Flow</td></tr></tbody></table><p>三. BPMN 发展</p><p>四. 开源引擎介绍</p><p>五. 主流程的引擎对比</p><p>六. 流程PaaS中的实现</p><p>七. 流程在PaaS中的最佳实践</p>]]></content>
     
     
       
